@@ -1,4 +1,4 @@
-import { Target, Eye, Award, Shield, Globe, Users, Heart, Zap, CheckCircle, TrendingUp, Factory, MapPin, Clock, UserCircle } from 'lucide-react';
+import { Target, Eye, Award, Shield, Globe, Users, Heart, Zap, CheckCircle, UserCircle } from 'lucide-react';
 
 export default function About() {
   const leaders = [

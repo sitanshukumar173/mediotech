@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChevronRight, ChevronDown, SlidersHorizontal, Grid3x3, List, X, Eye } from 'lucide-react';
+import { ChevronDown, SlidersHorizontal, Grid3x3, X, Eye } from 'lucide-react';
 
 // Dummy product data structure
 const categories = {
@@ -72,7 +72,17 @@ const categories = {
 
 // Generate dummy products
 const generateProducts = () => {
-  const products = [];
+  const products: Array<{
+    id: number;
+    name: string;
+    category: string;
+    subCategory: string;
+    subSubCategory: string;
+    description: string;
+    price: number;
+    availability: string;
+    image: null;
+  }> = [];
   let id = 1;
   
   const descriptions = [
