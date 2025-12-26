@@ -97,9 +97,9 @@ const generateProducts = () => {
   ];
   
   Object.entries(categories).forEach(([mainCat, subCats]) => {
-    Object.entries(subCats).forEach(([subCat, subSubCats]) => {
+    Object.entries(subCats as Record<string, Record<string, string[]>>).forEach(([subCat, subSubCats]) => {
       Object.entries(subSubCats).forEach(([subSubCat, models]) => {
-        models.forEach((model) => {
+        (models as string[]).forEach((model: string) => {
           products.push({
             id: id++,
             name: model,

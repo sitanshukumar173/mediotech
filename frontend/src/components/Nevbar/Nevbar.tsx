@@ -43,20 +43,6 @@ export default function Navbar() {
     ],
   };
 
-  const solutionsMenu = {
-    'By Department': [
-      { icon: Heart, label: 'Intensive Care Units', desc: 'Complete ICU solutions' },
-      { icon: Activity, label: 'Emergency Departments', desc: 'Emergency care equipment' },
-      { icon: Stethoscope, label: 'Operating Rooms', desc: 'Surgical suite equipment' },
-      { icon: Building2, label: 'General Wards', desc: 'Ward care solutions' },
-    ],
-    'By Scale': [
-      { icon: Building2, label: 'Large Hospitals', desc: '500+ bed facilities' },
-      { icon: Users, label: 'Medium Hospitals', desc: '100-500 bed facilities' },
-      { icon: Heart, label: 'Clinics', desc: 'Outpatient care centers' },
-    ],
-  };
-
   const resourcesMenu = {
     'Documentation': [
       { icon: BookOpen, label: 'Product Manuals', desc: 'Complete user guides' },
