@@ -1,0 +1,9 @@
+.bg-grid-pattern {
+  background-image: radial-gradient(circle, #2563EB 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.bg-grid-pattern-small {
+  background-image: radial-gradient(circle, #2563EB 1px, transparent 1px);
+  background-size: 20px 20px;
+}
