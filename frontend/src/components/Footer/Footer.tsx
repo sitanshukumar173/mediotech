@@ -35,10 +35,10 @@ export default function Footer() {
       <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl"></div>
       
-      <div className="max-w-7xl mx-auto px-20 py-16 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+      <div className="px-5 md:px-8 lg:px-8 xl:px-14 2xl:px-16 max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto py-10 md:py-12 lg:py-14 xl:py-16 2xl:py-20 relative z-10">
+        <div className="flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-10 mb-8 md:mb-10 lg:mb-12">
           {/* Brand Column */}
-          <div>
+          <div className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(25%-1.875rem)]">
             <div className="flex items-center gap-2.5 mb-5">
               <img src={logo} alt="Mediotech" className="h-10 w-10" />
               <span className="text-xl font-bold text-white">Mediotech</span>
@@ -64,7 +64,7 @@ export default function Footer() {
           </div>
           
           {/* Products Column */}
-          <div>
+          <div className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(25%-1.875rem)]">
             <h3 className="text-white text-base font-bold mb-5">Products</h3>
             <ul className="space-y-3">
               {productLinks.map((link, index) => (
@@ -78,7 +78,7 @@ export default function Footer() {
           </div>
           
           {/* Company Column */}
-          <div>
+          <div className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(25%-1.875rem)]">
             <h3 className="text-white text-base font-bold mb-5">Company</h3>
             <ul className="space-y-3">
               {companyLinks.map((link, index) => (
@@ -92,7 +92,7 @@ export default function Footer() {
           </div>
           
           {/* Contact Column */}
-          <div>
+          <div className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(25%-1.875rem)]">
             <h3 className="text-white text-base font-bold mb-5">Contact</h3>
             <ul className="space-y-3">
               {contactInfo.map((contact, index) => {
