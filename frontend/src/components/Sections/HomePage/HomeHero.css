@@ -7,3 +7,589 @@
   background-image: radial-gradient(circle, #2563EB 1px, transparent 1px);
   background-size: 20px 20px;
 }
+
+.hero-section {
+  min-height: 100vh;
+  padding-bottom: 2rem;
+}
+
+.hero-container > div {
+  width: 100%;
+}
+
+/* Make trusted card arrow button circular on all screens */
+.left-content .relative.bg-white\/50 button {
+  border-radius: 50% !important;
+}
+
+/* 390×844 Portrait Phone */
+@media (min-width: 360px) and (max-width: 420px) and (min-height: 800px) and (max-height: 900px) {
+  .hero-section {
+    min-height: auto !important;
+    padding: 0 !important;
+  }
+  
+  .hero-container {
+    padding: 4rem 1.5rem 1.5rem 1.5rem !important;
+    max-width: 100% !important;
+  }
+  
+  .hero-container > div {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+    align-items: center !important;
+    min-height: auto !important;
+  }
+  
+  .left-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 2rem !important;
+    order: 1 !important;
+  }
+  
+  .left-content > * {
+    margin: 0 auto !important;
+  }
+  
+  .left-content h1 {
+    font-size: 2.5rem !important;
+    line-height: 1 !important;
+  }
+  
+  .left-content p {
+    font-size: 0.875rem !important;
+    line-height: 1.5 !important;
+    max-width: 90% !important;
+  }
+  
+  .left-content {
+    max-width: 600px !important;
+  }
+  
+  /* Override grid min-height for 390x844 */
+  .hero-container > div {
+    min-height: auto !important;
+    gap: 2rem !important;
+  }
+  
+  .grid.min-h-screen {
+    min-height: auto !important;
+  }
+  
+  /* Trusted Card for 390×844 */
+  .left-content .relative.bg-white\/50 {
+    max-width: 550px !important;
+    padding: 1.5rem 2rem !important;
+    border-radius: 24px !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.90) 100%) !important;
+    backdrop-filter: blur(25px) !important;
+    -webkit-backdrop-filter: blur(25px) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.6) !important;
+    box-shadow: 0 12px 40px rgba(37, 99, 235, 0.18), 0 0 1px rgba(0, 0, 0, 0.05) !important;
+  }
+  
+  .left-content .relative.bg-white\/50 .w-8,
+  .left-content .relative.bg-white\/50 .md\:w-10 {
+    width: 3rem !important;
+    height: 3rem !important;
+    border-radius: 50% !important;
+    background: linear-gradient(135deg, #2563EB 0%, #1d4ed8 100%) !important;
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  .left-content .relative.bg-white\/50 .w-8:hover,
+  .left-content .relative.bg-white\/50 .md\:w-10:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  }
+  
+  .left-content .relative.bg-white\/50 svg {
+    width: 1.1rem !important;
+    height: 1.1rem !important;
+  }
+  
+  .left-content .relative.bg-white\/50 .text-\[10px\] {
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 1rem !important;
+    color: #111827 !important;
+    font-weight: 500 !important;
+  }
+  
+  .left-content .relative.bg-white\/50 .flex div[class*="w-6"],
+  .left-content .relative.bg-white\/50 .flex div[class*="md:w-8"] {
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+    border: 3px solid rgba(255, 255, 255, 0.8) !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  .left-content .relative.bg-white\/50 .flex div[class*="w-6"]:hover,
+  .left-content .relative.bg-white\/50 .flex div[class*="md:w-8"]:hover {
+    transform: scale(1.08) translateY(-2px) !important;
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+  }
+  
+  .left-content .relative.bg-white\/50 .flex div:last-child span {
+    font-size: 0.7rem !important;
+    font-weight: 600 !important;
+    color: #1f2937 !important;
+  }
+  
+  .featured-section {
+    width: 100% !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    order: 2 !important;
+    min-height: auto !important;
+  }
+  
+  .featured-display {
+    position: relative !important;
+    width: 100% !important;
+    height: 55vh !important;
+    padding: 0 !important;
+  }
+  
+  .featured-tag-pos {
+    top: -0.3rem !important;
+    left: -0.25rem !important;
+    transform: translateY(-0.5rem) !important;
+  }
+
+  .featured-title-pos {
+    bottom: 2rem !important;
+  }
+  
+  /* Move dots horizontal below title for 390×844 */
+  .featured-dots {
+    position: absolute !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: 1rem !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    flex-direction: row !important;
+    gap: 0.5rem !important;
+  }
+  
+  .featured-dots button {
+    width: 2rem !important;
+    height: 0.5rem !important;
+  }
+  
+  .featured-dots button.h-2 {
+    height: 0.5rem !important;
+  }
+  
+  .featured-dots button:not(.h-2) {
+    width: 2.5rem !important;
+  }
+  
+  .featured-display img {
+    max-height: 280px !important;
+  }
+}
+
+/* 844×390 Landscape - Same as 768×1024 */
+@media (min-width: 820px) and (max-width: 900px) and (max-height: 420px) {
+  .hero-section {
+    min-height: 100vh !important;
+    padding: 0 !important;
+  }
+  
+  .hero-container {
+    padding: 6.5rem 2.5rem 2rem 2.5rem !important;
+    max-width: 100% !important;
+  }
+  
+  .hero-container > div {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 3rem !important;
+    align-items: center !important;
+    min-height: 220vh !important;
+  }
+  
+  .left-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 2rem !important;
+    order: 1 !important;
+  }
+  
+  .left-content > * {
+    margin: 0 auto !important;
+  }
+  
+  .left-content h1 {
+    font-size: 3rem !important;
+    line-height: 1 !important;
+  }
+  
+  .left-content p {
+    font-size: 0.875rem !important;
+    line-height: 1.5 !important;
+    max-width: 90% !important;
+  }
+  
+  .left-content {
+    max-width: 600px !important;
+  }
+  
+  /* Trusted Card Redesign for 844x390 */
+  .left-content .relative.bg-white\/50 {
+    max-width: 550px !important;
+    padding: 2rem 2.5rem !important;
+    border-radius: 28px !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.90) 100%) !important;
+    backdrop-filter: blur(25px) !important;
+    -webkit-backdrop-filter: blur(25px) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.6) !important;
+    box-shadow: 0 12px 40px rgba(37, 99, 235, 0.18), 0 0 1px rgba(0, 0, 0, 0.05) !important;
+  }
+  
+  .left-content .relative.bg-white\/50 .w-8,
+  .left-content .relative.bg-white\/50 .md\:w-10 {
+    width: 3.5rem !important;
+    height: 3.5rem !important;
+    border-radius: 50% !important;
+    background: linear-gradient(135deg, #2563EB 0%, #1d4ed8 100%) !important;
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  .left-content .relative.bg-white\/50 .w-8:hover,
+  .left-content .relative.bg-white\/50 .md\:w-10:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  }
+  
+  .left-content .relative.bg-white\/50 svg {
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+  }
+  
+  .left-content .relative.bg-white\/50 .text-\[10px\] {
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 1.25rem !important;
+    color: #111827 !important;
+    font-weight: 500 !important;
+  }
+  
+  .left-content .relative.bg-white\/50 .flex div[class*="w-6"],
+  .left-content .relative.bg-white\/50 .flex div[class*="md:w-8"] {
+    width: 3rem !important;
+    height: 3rem !important;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+    border: 3px solid rgba(255, 255, 255, 0.8) !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  .left-content .relative.bg-white\/50 .flex div[class*="w-6"]:hover,
+  .left-content .relative.bg-white\/50 .flex div[class*="md:w-8"]:hover {
+    transform: scale(1.08) translateY(-2px) !important;
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+  }
+  
+  .left-content .relative.bg-white\/50 .flex div:last-child span {
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    color: #1f2937 !important;
+  }
+  
+  .featured-section {
+    width: 100% !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    order: 2 !important;
+  }
+  
+  .featured-display {
+    position: relative !important;
+    width: 100% !important;
+    height: 110vh !important;
+    padding: 0 !important;
+  }
+  
+  .featured-tag-pos {
+    top: 2rem !important;
+    left: 4.5rem !important;
+    transform: none !important;
+  }
+
+  .featured-title-pos {
+    bottom: 1.5rem !important;
+  }
+  
+  /* Move dots horizontal below title for 844x390 */
+  .featured-dots {
+    position: absolute !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: 0.5rem !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    flex-direction: row !important;
+    gap: 0.5rem !important;
+  }
+  
+  .featured-dots button {
+    width: 2rem !important;
+    height: 0.5rem !important;
+  }
+  
+  .featured-dots button.h-2 {
+    height: 0.5rem !important;
+  }
+  
+  .featured-dots button:not(.h-2) {
+    width: 2.5rem !important;
+  }
+  
+  .featured-display img {
+    max-height: 280px !important;
+  }
+}
+
+/* 768×1024 Portrait Tablet - Complete Rebuild */
+@media (min-width: 740px) and (max-width: 820px) and (min-height: 980px) and (max-height: 1050px) {
+  .hero-section {
+    min-height: 100vh !important;
+    padding: 0 !important;
+  }
+  
+  .hero-container {
+    padding: 6.5rem 2.5rem 2rem 2.5rem !important;
+    max-width: 100% !important;
+  }
+  
+  .hero-container > div {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2rem !important;
+    align-items: center !important;
+    min-height: 95vh !important;
+  }
+  
+  .left-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 2rem !important;
+    order: 1 !important;
+  }
+  
+  .left-content > * {
+    margin: 0 auto !important;
+  }
+  
+  .left-content h1 {
+    font-size: 3rem !important;
+    line-height: 1 !important;
+  }
+  
+  .left-content p {
+    font-size: 0.875rem !important;
+    line-height: 1.5 !important;
+    max-width: 90% !important;
+  }
+  
+  .left-content {
+    max-width: 600px !important;
+  }
+  
+  /* Trusted Card Redesign for 768x1024 */
+  .left-content .relative.bg-white\/50 {
+    max-width: 550px !important;
+    padding: 2rem 2.5rem !important;
+    border-radius: 28px !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.90) 100%) !important;
+    backdrop-filter: blur(25px) !important;
+    -webkit-backdrop-filter: blur(25px) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.6) !important;
+    box-shadow: 0 12px 40px rgba(37, 99, 235, 0.18), 0 0 1px rgba(0, 0, 0, 0.05) !important;
+  }
+  
+  .left-content .relative.bg-white\/50 .w-8,
+  .left-content .relative.bg-white\/50 .md\:w-10 {
+    width: 3.5rem !important;
+    height: 3.5rem !important;
+    border-radius: 50% !important;
+    background: linear-gradient(135deg, #2563EB 0%, #1d4ed8 100%) !important;
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  .left-content .relative.bg-white\/50 .w-8:hover,
+  .left-content .relative.bg-white\/50 .md\:w-10:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  }
+  
+  .left-content .relative.bg-white\/50 svg {
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+  }
+  
+  .left-content .relative.bg-white\/50 .text-\[10px\] {
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 1.25rem !important;
+    color: #111827 !important;
+    font-weight: 500 !important;
+  }
+  
+  .left-content .relative.bg-white\/50 .flex div[class*="w-6"],
+  .left-content .relative.bg-white\/50 .flex div[class*="md:w-8"] {
+    width: 3rem !important;
+    height: 3rem !important;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+    border: 3px solid rgba(255, 255, 255, 0.8) !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  .left-content .relative.bg-white\/50 .flex div[class*="w-6"]:hover,
+  .left-content .relative.bg-white\/50 .flex div[class*="md:w-8"]:hover {
+    transform: scale(1.08) translateY(-2px) !important;
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+  }
+  
+  .left-content .relative.bg-white\/50 .flex div:last-child span {
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    color: #1f2937 !important;
+  }
+  
+  .featured-section {
+    width: 100% !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    order: 2 !important;
+  }
+  
+  .featured-display {
+    position: relative !important;
+    width: 100% !important;
+    height: 45vh !important;
+    padding: 0 !important;
+  }
+  
+  .featured-tag-pos {
+    top: 4rem !important;
+    left: 4.5rem !important;
+  }
+
+  .featured-title-pos {
+    bottom: 4rem !important;
+  }
+  
+  /* Move dots horizontal below title for 768x1024 */
+  .featured-dots {
+    position: absolute !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: 1rem !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    flex-direction: row !important;
+    gap: 0.5rem !important;
+  }
+  
+  .featured-dots button {
+    width: 2rem !important;
+    height: 0.5rem !important;
+  }
+  
+  .featured-dots button.h-2 {
+    height: 0.5rem !important;
+  }
+  
+  .featured-dots button:not(.h-2) {
+    width: 2.5rem !important;
+  }
+  
+  .featured-display img {
+    max-height: 280px !important;
+  }
+}
+
+@media (min-width: 1280px) and (min-height: 800px) {
+  .featured-tag-pos {
+    top: 9rem !important;
+  }
+
+  .featured-title-pos {
+    bottom: 7rem !important;
+  }
+}
+
+@media (min-width: 1280px) and (min-height: 900px) {
+  .featured-tag-pos {
+    top: 10rem !important;
+    left: 1.5rem !important;
+    transform: translateY(3rem) !important;
+  }
+
+  .featured-title-pos {
+    bottom: 8rem !important;
+  }
+}
+
+@media (max-width: 430px) and (min-height: 820px) {
+  .featured-section {
+    min-height: 75vh;
+  }
+
+  .featured-tag-pos {
+    top: 5.5rem !important;
+  }
+
+  .featured-title-pos {
+    bottom: 4.5rem !important;
+  }
+
+  .featured-dots {
+    right: -0.25rem !important;
+  }
+}
+
+@media (min-width: 1400px) and (max-height: 750px) {
+  .featured-tag-pos {
+    top: 6rem !important;
+    left: 1.5rem !important;
+    transform: translateY(0.5rem) !important;
+  }
+
+  .featured-title-pos {
+    bottom: 3.5rem !important;
+  }
+}
