@@ -1,14 +1,39 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Phone, ChevronDown, Package, Stethoscope, Activity, Heart, Thermometer, Droplet, Zap, BookOpen, FileText, Video, GraduationCap, Shield, Wrench, Headphones, Building2, Users, Globe, Award, Target, Menu, X } from 'lucide-react';
+import { Phone, ChevronDown, Package, Package2, Heart, BookOpen, FileText, Video, GraduationCap, Shield, Wrench, Headphones, Building2, Users, Globe, Award, Target, Menu, X, Loader } from 'lucide-react';
+import axiosInstance from '../../api/axios';
 // Use a direct URL string for external images
 const logo = "https://res.cloudinary.com/dlpluej6w/image/upload/v1766543013/Image_Mediotech_fv7zjv.svg";
+
+interface Category {
+  _id: string;
+  name: string;
+  parentCategory: string | { _id: string; name?: string } | null;
+}
+
+interface Product {
+  _id: string;
+  title: string;
+  category: string | { _id: string; name?: string } | null;
+}
+
+interface TreeNode {
+  id: string;
+  type: 'category' | 'product';
+  name: string;
+  children?: TreeNode[];
+  data?: Category | Product;
+}
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeMobileDropdown, setActiveMobileDropdown] = useState<string | null>(null);
+  const [productTree, setProductTree] = useState<TreeNode[]>([]);
+  const [loadingProducts, setLoadingProducts] = useState(true);
+  const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,22 +73,135 @@ export default function Navbar() {
     setActiveMobileDropdown(activeMobileDropdown === dropdown ? null : dropdown);
   };
 
-  const productsMenu = {
-    'ICU Equipment': [
-      { icon: Activity, label: 'ICU Ventilators', desc: 'Advanced respiratory support' },
-      { icon: Heart, label: 'Patient Monitors', desc: 'Multi-parameter monitoring' },
-      { icon: Droplet, label: 'Infusion Pumps', desc: 'Precision medication delivery' },
-      { icon: Thermometer, label: 'Anesthesia Systems', desc: 'Complete anesthesia solutions' },
-    ],
-    'Monitoring Systems': [
-      { icon: Activity, label: 'ECG Monitors', desc: 'Cardiac rhythm monitoring' },
-      { icon: Stethoscope, label: 'Vital Signs Monitors', desc: 'Comprehensive vital tracking' },
-      { icon: Zap, label: 'Defibrillators', desc: 'Emergency cardiac care' },
-    ],
-    'Support Equipment': [
-      { icon: Package, label: 'IV Stands', desc: 'Medical-grade support systems' },
-      { icon: Shield, label: 'Sterilizers', desc: 'Advanced sterilization' },
-    ],
+  const toggleCategory = (id: string) => {
+    const next = new Set(expandedIds);
+    if (next.has(id)) {
+      next.delete(id);
+    } else {
+      next.add(id);
+    }
+    setExpandedIds(next);
+  };
+
+  const handleCategorySelect = (categoryId: string) => {
+    setSelectedCategoryId(selectedCategoryId === categoryId ? null : categoryId);
+  };
+
+  useEffect(() => {
+    const buildProductTree = async () => {
+      try {
+        const [catRes, prodRes] = await Promise.all([
+          axiosInstance.get('/admin/category'),
+          axiosInstance.get('/admin/product'),
+        ]);
+
+        const categories: Category[] = Array.isArray(catRes.data) ? catRes.data : catRes.data?.categories || [];
+        const products: Product[] = Array.isArray(prodRes.data) ? prodRes.data : prodRes.data?.products || [];
+
+        const categoryMap = new Map<string, TreeNode>();
+        categories.forEach((cat) => {
+          categoryMap.set(cat._id, {
+            id: cat._id,
+            type: 'category',
+            name: cat.name,
+            children: [],
+            data: cat,
+          });
+        });
+
+        const roots: TreeNode[] = [];
+        categories.forEach((cat) => {
+          const node = categoryMap.get(cat._id)!;
+          const parentId = typeof cat.parentCategory === 'object' ? cat.parentCategory?._id : cat.parentCategory;
+
+          if (!parentId) {
+            roots.push(node);
+          } else {
+            const parent = categoryMap.get(parentId);
+            if (parent) {
+              parent.children?.push(node);
+            } else {
+              roots.push(node);
+            }
+          }
+        });
+
+        products.forEach((product) => {
+          const categoryId = typeof product.category === 'object' ? product.category?._id : product.category;
+          const parent = categoryId ? categoryMap.get(categoryId) : undefined;
+          const productNode: TreeNode = {
+            id: product._id,
+            type: 'product',
+            name: product.title,
+            data: product,
+          };
+
+          if (parent) {
+            parent.children = parent.children || [];
+            parent.children.push(productNode);
+          } else {
+            roots.push(productNode);
+          }
+        });
+
+        setProductTree(roots);
+      } catch (error) {
+        console.error('Failed to load products:', error);
+        setProductTree([]);
+      } finally {
+        setLoadingProducts(false);
+      }
+    };
+
+    buildProductTree();
+  }, []);
+
+  const renderProductTree = (node: TreeNode, depth: number = 0) => {
+    const isExpanded = expandedIds.has(node.id);
+    const hasChildren = node.children && node.children.length > 0;
+
+    if (node.type === 'product') {
+      return (
+        <Link
+          key={node.id}
+          to="/products"
+          className="w-full text-left px-3 py-2 rounded-lg text-[12px] font-semibold text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-all border border-transparent hover:border-blue-200 truncate flex items-center gap-2"
+          style={{ paddingLeft: `${depth * 12 + 10}px` }}
+          title={node.name}
+        >
+          <Package2 size={14} className="flex-shrink-0" />
+          {node.name}
+        </Link>
+      );
+    }
+
+    return (
+      <div key={node.id}>
+        <button
+          onClick={() => {
+            toggleCategory(node.id);
+            handleCategorySelect(node.id);
+          }}
+          className={`w-full flex items-center justify-between p-2.5 rounded-xl transition-all border ${
+            selectedCategoryId === node.id
+              ? 'bg-blue-600 text-white border-blue-600 shadow-md'
+              : 'hover:bg-blue-50 text-gray-700 border-transparent'
+          }`}
+          style={{ paddingLeft: `${depth * 12 + 10}px` }}
+        >
+          <span className="font-semibold text-[13px] truncate">{node.name}</span>
+          {hasChildren && (
+            <ChevronDown className={`w-4 h-4 transition-transform flex-shrink-0 ${isExpanded ? 'rotate-180' : ''}`} />
+          )}
+        </button>
+
+        {isExpanded && hasChildren && (
+          <div className="space-y-1 mt-1">
+            {node.children!.map((child) => renderProductTree(child, depth + 1))}
+          </div>
+        )}
+      </div>
+    );
   };
 
   const resourcesMenu = {
@@ -153,48 +291,37 @@ export default function Navbar() {
               {/* Mega Menu */}
               {activeDropdown === 'products' && (
                 <div className="absolute top-full left-1/2 -translate-x-1/2 pt-6">
-                  <div className="w-[800px] bg-white rounded-[28px] shadow-2xl border-2 border-gray-100 p-8">
-                    <div className="grid grid-cols-3 gap-8">
-                      {Object.entries(productsMenu).map(([category, items]) => (
-                        <div key={category}>
-                          <h3 className="text-[11px] font-bold text-gray-500 uppercase tracking-[0.15em] mb-5">
-                            {category}
-                          </h3>
-                          <div className="space-y-1">
-                            {items.map((item) => {
-                              const Icon = item.icon;
-                              return (
-                                <Link
-                                  key={item.label}
-                                  to="/products"
-                                  className="flex items-start gap-3 p-3 rounded-2xl hover:bg-blue-50 transition-all group"
-                                >
-                                  <div className="w-10 h-10 bg-gradient-to-br from-[#2563EB] to-[#1d4ed8] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                                    <Icon className="w-5 h-5 text-white" />
-                                  </div>
-                                  <div className="flex-1">
-                                    <div className="text-[14px] font-bold text-gray-900 mb-0.5">
-                                      {item.label}
-                                    </div>
-                                    <div className="text-[12px] text-gray-600">
-                                      {item.desc}
-                                    </div>
-                                  </div>
-                                </Link>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                    
-                    {/* View All Products Button */}
-                    <div className="mt-6 pt-6 border-t border-gray-200">
+                  <div className="w-[520px] bg-white rounded-[24px] shadow-2xl border-2 border-gray-100 p-4">
+                    <div className="flex items-center justify-between px-2 pb-3">
+                      <h3 className="text-[11px] font-bold text-gray-500 uppercase tracking-[0.15em]">
+                        Product Categories
+                      </h3>
                       <Link
                         to="/products"
-                        className="flex items-center justify-center gap-2 w-full px-6 py-3 bg-gradient-to-r from-[#2563EB] to-[#1d4ed8] text-white rounded-xl font-bold hover:shadow-lg hover:scale-[1.02] transition-all"
+                        className="text-[11px] font-bold text-blue-600 hover:text-blue-700 transition"
                       >
-                        <Package className="w-5 h-5" />
+                        Browse All
+                      </Link>
+                    </div>
+
+                    <div className="max-h-[420px] overflow-y-auto pr-2 space-y-1">
+                      {loadingProducts ? (
+                        <div className="flex items-center justify-center py-8">
+                          <Loader className="w-5 h-5 text-blue-600 animate-spin" />
+                        </div>
+                      ) : productTree.length > 0 ? (
+                        productTree.map((node) => renderProductTree(node))
+                      ) : (
+                        <p className="text-gray-600 text-sm px-2">No products available</p>
+                      )}
+                    </div>
+
+                    <div className="mt-4 pt-4 border-t border-gray-200">
+                      <Link
+                        to="/products"
+                        className="flex items-center justify-center gap-2 w-full px-5 py-2.5 bg-gradient-to-r from-[#2563EB] to-[#1d4ed8] text-white rounded-xl font-bold hover:shadow-lg hover:scale-[1.02] transition-all"
+                      >
+                        <Package className="w-4 h-4" />
                         View All Products
                       </Link>
                     </div>
@@ -376,32 +503,18 @@ export default function Navbar() {
                 </button>
                 {activeMobileDropdown === 'products' && (
                   <div className="mt-2 ml-4 space-y-2">
-                    {Object.entries(productsMenu).map(([category, items]) => (
-                      <div key={category} className="space-y-1">
-                        <div className="px-4 py-2 text-[11px] font-bold text-gray-500 uppercase tracking-wider">
-                          {category}
-                        </div>
-                        {items.map((item) => {
-                          const Icon = item.icon;
-                          return (
-                            <Link
-                              key={item.label}
-                              to="/products"
-                              onClick={toggleMobileMenu}
-                              className="flex items-center gap-3 px-4 py-2.5 hover:bg-blue-50 rounded-lg transition-colors"
-                            >
-                              <div className="w-8 h-8 bg-gradient-to-br from-[#2563EB] to-[#1d4ed8] rounded-lg flex items-center justify-center flex-shrink-0">
-                                <Icon className="w-4 h-4 text-white" />
-                              </div>
-                              <div>
-                                <div className="text-[13px] font-semibold text-gray-900">{item.label}</div>
-                                <div className="text-[11px] text-gray-600">{item.desc}</div>
-                              </div>
-                            </Link>
-                          );
-                        })}
+                    {loadingProducts ? (
+                      <div className="flex items-center gap-2 py-2">
+                        <Loader className="w-4 h-4 text-blue-600 animate-spin" />
+                        <span className="text-sm text-gray-600">Loading...</span>
                       </div>
-                    ))}
+                    ) : productTree.length > 0 ? (
+                      <div className="space-y-2">
+                        {productTree.map((node) => renderProductTree(node))}
+                      </div>
+                    ) : (
+                      <p className="text-sm text-gray-600">No products available</p>
+                    )}
                   </div>
                 )}
               </div>

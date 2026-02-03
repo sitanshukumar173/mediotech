@@ -1,31 +1,29 @@
-import { Facebook, Twitter, Linkedin, Instagram, Mail, Phone, MapPin } from 'lucide-react';
+import { Linkedin, Instagram, Mail, Phone, MapPin } from 'lucide-react';
 const logo = 'https://res.cloudinary.com/dlpluej6w/image/upload/v1766543013/Image_Mediotech_fv7zjv.svg';
 
 const socialLinks = [
-  { icon: Facebook, href: '#', label: 'Facebook' },
-  { icon: Twitter, href: '#', label: 'Twitter' },
-  { icon: Linkedin, href: '#', label: 'LinkedIn' },
-  { icon: Instagram, href: '#', label: 'Instagram' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/company/mediotech-healthcare-solutions-private-limited/?originalSubdomain=in', label: 'LinkedIn' },
+  { icon: Instagram, href: 'https://www.instagram.com/mediotechprimesolutions/', label: 'Instagram' },
 ];
 
 const productLinks = [
-  { label: 'ICU Ventilators', href: '#' },
-  { label: 'Patient Monitors', href: '#' },
-  { label: 'Infusion Systems', href: '#' },
-  { label: 'All Products', href: '#' },
+  { label: 'ICU Ventilators', href: '/products' },
+  { label: 'Patient Monitors', href: '/products' },
+  { label: 'Infusion Systems', href: '/products' },
+  { label: 'All Products', href: '/products' },
 ];
 
 const companyLinks = [
-  { label: 'About Us', href: '#' },
-  { label: 'Careers', href: '#' },
-  { label: 'News', href: '#' },
-  { label: 'Contact', href: '#' },
+  { label: 'About Us', href: '/about' },
+  { label: 'Careers', href: '/contact' },
+  { label: 'News', href: '/contact' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 const contactInfo = [
-  { icon: Phone, text: '+91 1800 XXX XXXX' },
-  { icon: Mail, text: 'contact@mediotech.com' },
-  { icon: MapPin, text: 'Mumbai, Maharashtra, India' },
+  { icon: Phone, text: '+91 9528425813', href: 'tel:+919528425813' },
+  { icon: Mail, text: 'mediotech@outlook.in', href: 'mailto:mediotech@outlook.in' },
+  { icon: MapPin, text: 'CSJM University, Kalyanpur, Kanpur', href: '/contact' },
 ];
 
 export default function Footer() {
@@ -54,6 +52,8 @@ export default function Footer() {
                     key={index}
                     href={social.href}
                     aria-label={social.label}
+                    target="_blank"
+                    rel="noreferrer noopener"
                     className="w-10 h-10 bg-white/5 border border-white/10 rounded-xl hover:bg-[#2563EB] hover:border-[#2563EB] transition-all flex items-center justify-center group"
                   >
                     <Icon className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
@@ -100,7 +100,9 @@ export default function Footer() {
                 return (
                   <li key={index} className="flex items-start gap-3">
                     <Icon className="w-4 h-4 text-[#2563EB] mt-0.5 flex-shrink-0" />
-                    <span className="text-sm text-gray-400">{contact.text}</span>
+                    <a href={contact.href} className="text-sm text-gray-400 hover:text-[#2563EB] transition-colors">
+                      {contact.text}
+                    </a>
                   </li>
                 );
               })}

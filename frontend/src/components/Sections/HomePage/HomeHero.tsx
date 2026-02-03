@@ -1,11 +1,13 @@
 import { Search, ArrowRight } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { useState, useEffect } from 'react';
+import { useDemoRequest } from '../../../context/DemoRequestContext';
 import './HomeHero.css';
 
 export function HomeHero() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const { openDemoRequest } = useDemoRequest();
 
   const featuredItems = [
     {
@@ -115,7 +117,10 @@ export function HomeHero() {
                     <Search className="w-4 h-4 md:w-4.5 md:h-4.5 lg:w-4 lg:h-4 text-white" />
                   </div>
                 </button>
-                <button className="group inline-flex items-center justify-center gap-3 md:gap-3.5 lg:gap-3 bg-white border-2 border-gray-200 text-gray-900 pl-7 md:pl-7 lg:pl-6 pr-2.5 md:pr-2.5 lg:pr-2 py-3.5 md:py-4 lg:py-3 rounded-full hover:border-blue-300 hover:shadow-lg hover:-translate-y-1 transition-all">
+                <button
+                  onClick={() => openDemoRequest()}
+                  className="group inline-flex items-center justify-center gap-3 md:gap-3.5 lg:gap-3 bg-white border-2 border-gray-200 text-gray-900 pl-7 md:pl-7 lg:pl-6 pr-2.5 md:pr-2.5 lg:pr-2 py-3.5 md:py-4 lg:py-3 rounded-full hover:border-blue-300 hover:shadow-lg hover:-translate-y-1 transition-all"
+                >
                   <span className="text-[13px] md:text-[14px] lg:text-[13px] font-bold whitespace-nowrap">Watch Demo</span>
                   <ArrowRight className="w-4 h-4 md:w-4.5 md:h-4.5 lg:w-4 lg:h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
@@ -206,7 +211,7 @@ export function HomeHero() {
                   </div>
 
                   {/* Floating Featured Tag - Fixed Position Top */}
-                  <div className="absolute top-1 -left-4 md:-left-4 lg:-left-6 z-30 featured-tag-pos">
+                  <div className="absolute top-32 -left-4 md:-left-10 lg:-left-6 z-30 featured-tag-pos">
                     <div className="inline-flex items-center gap-2 md:gap-2.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full px-4 md:px-5 py-2.5 md:py-3.5 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transition-all hover:scale-105 cursor-pointer">
                       <div className="w-2 h-2 md:w-2.5 md:h-2.5 bg-white rounded-full animate-pulse"></div>
                       <span className="text-[10px] md:text-[11px] lg:text-[11px] font-bold uppercase tracking-[0.15em]">Featured</span>
