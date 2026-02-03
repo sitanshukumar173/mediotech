@@ -1,5 +1,5 @@
 import { useState, type ChangeEvent, type FormEvent } from 'react';
-import { Phone, Mail, MapPin, Send, Instagram, Linkedin } from 'lucide-react';
+import { MapPin, Send, Instagram, Linkedin } from 'lucide-react';
 import { toast } from 'react-toastify';
 import axiosInstance from '../../api/axios';
 
