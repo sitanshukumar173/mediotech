@@ -86,14 +86,14 @@ export function HomeHero() {
             {/* Left Content */}
             <div className="left-content lg:col-span-5 space-y-12 md:space-y-12 lg:space-y-10 py-6 md:py-4 lg:py-12 order-1 md:order-1 lg:order-1 flex flex-col items-center lg:items-start text-center lg:text-left justify-center">
               {/* Badge - Enhanced */}
-              <div className="inline-flex items-center gap-2 md:gap-2.5 lg:gap-2 bg-gradient-to-r from-blue-50 to-blue-100/50 border-2 border-blue-200/60 rounded-full px-5 md:px-5.5 lg:px-4 py-2.5 md:py-2.5 lg:py-2 shadow-lg shadow-blue-200/40 hover:shadow-xl hover:shadow-blue-300/50 transition-all hover:scale-105 mx-auto lg:mx-0">
+              <div className="inline-flex items-center gap-2 sm-tablet:gap-2.5 tablet:gap-2 bg-gradient-to-r from-blue-50 to-blue-100/50 border-2 border-blue-200/60 rounded-full px-5 sm-tablet:px-5.5 tablet:px-4 py-2.5 sm-tablet:py-2.5 tablet:py-2 shadow-lg shadow-blue-200/40 hover:shadow-xl hover:shadow-blue-300/50 transition-all hover:scale-105 mx-auto tablet:mx-0">
                 <div className="w-2.5 h-2.5 md:w-2.5 lg:w-2 lg:h-2 bg-gradient-to-r from-[#2563EB] to-[#1d4ed8] rounded-full animate-pulse shadow-lg shadow-blue-400/50"></div>
-                <span className="text-[9px] md:text-[10px] lg:text-[10px] font-bold bg-gradient-to-r from-[#2563EB] to-[#1d4ed8] bg-clip-text text-transparent uppercase tracking-[0.15em]">Leading ICU Solutions</span>
+                <span className="font-bold bg-gradient-to-r from-[#2563EB] to-[#1d4ed8] bg-clip-text text-transparent uppercase tracking-[0.15em]" style={{ fontSize: 'clamp(0.65rem, 1.5vw, 0.75rem)' }}>Leading ICU Solutions</span>
               </div>
 
               {/* Headline - Enhanced */}
-              <div className="space-y-5 md:space-y-4 lg:space-y-2 w-full flex flex-col items-center lg:items-start">
-                <h1 className="text-[52px] md:text-[64px] lg:text-[44px] leading-[0.9] md:leading-[0.9] lg:leading-[0.92] font-bold text-gray-900 tracking-tight text-center lg:text-left">
+              <div className="space-y-5 sm-tablet:space-y-4 tablet:space-y-2 w-full flex flex-col items-center tablet:items-start">
+                <h1 className="leading-[0.9] sm-tablet:leading-[0.9] tablet:leading-[0.92] font-bold text-gray-900 tracking-tight text-center tablet:text-left" style={{ fontSize: 'clamp(2.5rem, 6vw, 3.5rem)' }}>
                   Advanced
                   <br />
                   <span className="relative inline-block bg-gradient-to-r from-gray-900 via-[#1d4ed8] to-gray-900 bg-clip-text text-transparent">
@@ -103,47 +103,47 @@ export function HomeHero() {
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-400/10 to-transparent blur-2xl -z-10"></div>
                   </span>
                 </h1>
-                <p className="text-[15px] md:text-[16px] lg:text-[13px] text-gray-600 leading-[1.75] md:leading-[1.7] lg:leading-[1.5] max-w-[520px] md:max-w-[580px] lg:max-w-[420px] text-center lg:text-left mx-auto lg:mx-0">
+                <p className="text-gray-600 leading-[1.75] sm-tablet:leading-[1.7] tablet:leading-[1.5] max-w-[520px] sm-tablet:max-w-[580px] tablet:max-w-[420px] text-center tablet:text-left mx-auto tablet:mx-0" style={{ fontSize: 'clamp(0.875rem, 2.5vw, 1rem)' }}>
                   <span className="font-bold text-gray-900">We deliver</span> cutting-edge medical technology and{' '}
                   <span className="font-bold text-gray-900">we care</span> about patient outcomes and safety across India's healthcare network.
                 </p>
               </div>
 
               {/* Buttons - Enhanced */}
-              <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3 md:gap-4 lg:gap-3 w-full md:w-auto md:justify-center lg:justify-start">
-                <button className="group inline-flex items-center justify-center gap-3 md:gap-3.5 lg:gap-3 bg-gradient-to-r from-[#2563EB] to-[#1d4ed8] text-white pl-7 md:pl-7 lg:pl-6 pr-2.5 md:pr-2.5 lg:pr-2 py-3.5 md:py-4 lg:py-3 rounded-full hover:shadow-2xl hover:shadow-blue-400/40 hover:-translate-y-1 transition-all shadow-xl">
-                  <span className="text-[13px] md:text-[14px] lg:text-[13px] font-bold whitespace-nowrap">Explore Ventilators</span>
-                  <div className="w-9 h-9 md:w-10 md:h-10 lg:w-8 lg:h-8 bg-white/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Search className="w-4 h-4 md:w-4.5 md:h-4.5 lg:w-4 lg:h-4 text-white" />
+              <div className="flex flex-col sm-tablet:flex-row items-stretch sm-tablet:items-center gap-3 sm-tablet:gap-4 tablet:gap-3 w-full sm-tablet:w-auto sm-tablet:justify-center tablet:justify-start">
+                <button className="group inline-flex items-center justify-center gap-3 sm-tablet:gap-3.5 tablet:gap-3 bg-gradient-to-r from-[#2563EB] to-[#1d4ed8] text-white pl-7 sm-tablet:pl-7 tablet:pl-6 pr-2.5 sm-tablet:pr-2.5 tablet:pr-2 py-3.5 sm-tablet:py-4 tablet:py-3 rounded-full hover:shadow-2xl hover:shadow-blue-400/40 hover:-translate-y-1 transition-all shadow-xl">
+                  <span className="font-bold whitespace-nowrap" style={{ fontSize: 'clamp(0.8rem, 2vw, 0.9rem)' }}>Explore Ventilators</span>
+                  <div className="w-9 h-9 sm-tablet:w-10 sm-tablet:h-10 tablet:w-8 tablet:h-8 bg-white/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Search className="w-4 h-4 sm-tablet:w-4.5 sm-tablet:h-4.5 tablet:w-4 tablet:h-4 text-white" />
                   </div>
                 </button>
                 <button
                   onClick={() => openDemoRequest()}
-                  className="group inline-flex items-center justify-center gap-3 md:gap-3.5 lg:gap-3 bg-white border-2 border-gray-200 text-gray-900 pl-7 md:pl-7 lg:pl-6 pr-2.5 md:pr-2.5 lg:pr-2 py-3.5 md:py-4 lg:py-3 rounded-full hover:border-blue-300 hover:shadow-lg hover:-translate-y-1 transition-all"
+                  className="group inline-flex items-center justify-center gap-3 sm-tablet:gap-3.5 tablet:gap-3 bg-white border-2 border-gray-200 text-gray-900 pl-7 sm-tablet:pl-7 tablet:pl-6 pr-2.5 sm-tablet:pr-2.5 tablet:pr-2 py-3.5 sm-tablet:py-4 tablet:py-3 rounded-full hover:border-blue-300 hover:shadow-lg hover:-translate-y-1 transition-all"
                 >
-                  <span className="text-[13px] md:text-[14px] lg:text-[13px] font-bold whitespace-nowrap">Watch Demo</span>
-                  <ArrowRight className="w-4 h-4 md:w-4.5 md:h-4.5 lg:w-4 lg:h-4 group-hover:translate-x-1 transition-transform" />
+                  <span className="font-bold whitespace-nowrap" style={{ fontSize: 'clamp(0.8rem, 2vw, 0.9rem)' }}>Watch Demo</span>
+                  <ArrowRight className="w-4 h-4 sm-tablet:w-4.5 sm-tablet:h-4.5 tablet:w-4 tablet:h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
 
               {/* Trusted Hospitals Card */}
-              <div className="relative bg-white/50 backdrop-blur-xl rounded-[18px] md:rounded-[24px] lg:rounded-[20px] px-4 md:px-6 lg:px-5 py-3.5 md:py-5 lg:py-4 shadow-lg hover:shadow-xl border border-white/30 w-full max-w-md md:max-w-lg lg:max-w-[420px] mx-auto lg:mx-0 transition-all duration-300 overflow-hidden group">
+              <div className="relative bg-white/50 backdrop-blur-xl rounded-[18px] sm-tablet:rounded-[24px] tablet:rounded-[20px] px-4 sm-tablet:px-6 tablet:px-5 py-3.5 sm-tablet:py-5 tablet:py-4 shadow-lg hover:shadow-xl border border-white/30 w-full max-w-md sm-tablet:max-w-lg tablet:max-w-[420px] mx-auto tablet:mx-0 transition-all duration-300 overflow-hidden group">
                 
-                <div className="relative z-10 flex gap-2.5 md:gap-4 lg:gap-3 items-center">
-                  <button className="w-8 h-8 md:w-10 md:h-10 lg:w-9 lg:h-9 bg-gradient-to-br from-[#2563EB] to-[#1d4ed8] rounded-lg flex items-center justify-center flex-shrink-0 hover:scale-110 transition-all duration-300 cursor-pointer shadow-md group/btn" title="Explore more">
-                    <ArrowRight className="w-3.5 h-3.5 md:w-4.5 md:h-4.5 lg:w-4 lg:h-4 text-white group-hover/btn:translate-x-1 transition-transform" />
+                <div className="relative z-10 flex gap-2.5 sm-tablet:gap-4 tablet:gap-3 items-center">
+                  <button className="w-8 h-8 sm-tablet:w-10 sm-tablet:h-10 tablet:w-9 tablet:h-9 bg-gradient-to-br from-[#2563EB] to-[#1d4ed8] rounded-lg flex items-center justify-center flex-shrink-0 hover:scale-110 transition-all duration-300 cursor-pointer shadow-md group/btn" title="Explore more">
+                    <ArrowRight className="w-3.5 h-3.5 sm-tablet:w-4.5 sm-tablet:h-4.5 tablet:w-4 tablet:h-4 text-white group-hover/btn:translate-x-1 transition-transform" />
                   </button>
                   <div className="flex-1 min-w-0">
-                    <div className="text-[10px] md:text-[12px] lg:text-[11px] text-gray-900 leading-snug md:leading-relaxed mb-2 md:mb-3 lg:mb-2.5 font-semibold">
+                    <div className="text-[10px] sm-tablet:text-[12px] tablet:text-[11px] text-gray-900 leading-snug sm-tablet:leading-relaxed mb-2 sm-tablet:mb-3 tablet:mb-2.5 font-semibold">
                       Trusted by <span className="font-bold text-gray-900">500+ hospitals</span>, serving healthcare nationwide
                     </div>
-                    <div className="flex -space-x-1.5 md:-space-x-2.5 lg:-space-x-2">
-                      <div className="w-6 h-6 md:w-8 md:h-8 lg:w-7 lg:h-7 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full border-2 border-white shadow-sm hover:scale-110 hover:z-10 transition-all duration-300 cursor-pointer"></div>
-                      <div className="w-6 h-6 md:w-8 md:h-8 lg:w-7 lg:h-7 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full border-2 border-white shadow-sm hover:scale-110 hover:z-10 transition-all duration-300 cursor-pointer"></div>
-                      <div className="w-6 h-6 md:w-8 md:h-8 lg:w-7 lg:h-7 bg-gradient-to-br from-pink-400 to-pink-600 rounded-full border-2 border-white shadow-sm hover:scale-110 hover:z-10 transition-all duration-300 cursor-pointer"></div>
-                      <div className="w-6 h-6 md:w-8 md:h-8 lg:w-7 lg:h-7 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full border-2 border-white shadow-sm hover:scale-110 hover:z-10 transition-all duration-300 cursor-pointer"></div>
-                      <div className="w-6 h-6 md:w-8 md:h-8 lg:w-7 lg:h-7 bg-white/90 backdrop-blur-sm rounded-full border-2 border-white flex items-center justify-center shadow-sm hover:scale-110 hover:z-10 transition-all duration-300 cursor-pointer">
-                        <span className="text-gray-800 text-[8px] md:text-[10px] lg:text-[9px] font-bold">+500</span>
+                    <div className="flex -space-x-1.5 sm-tablet:-space-x-2.5 tablet:-space-x-2">
+                      <div className="w-6 h-6 sm-tablet:w-8 sm-tablet:h-8 tablet:w-7 tablet:h-7 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full border-2 border-white shadow-sm hover:scale-110 hover:z-10 transition-all duration-300 cursor-pointer"></div>
+                      <div className="w-6 h-6 sm-tablet:w-8 sm-tablet:h-8 tablet:w-7 tablet:h-7 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full border-2 border-white shadow-sm hover:scale-110 hover:z-10 transition-all duration-300 cursor-pointer"></div>
+                      <div className="w-6 h-6 sm-tablet:w-8 sm-tablet:h-8 tablet:w-7 tablet:h-7 bg-gradient-to-br from-pink-400 to-pink-600 rounded-full border-2 border-white shadow-sm hover:scale-110 hover:z-10 transition-all duration-300 cursor-pointer"></div>
+                      <div className="w-6 h-6 sm-tablet:w-8 sm-tablet:h-8 tablet:w-7 tablet:h-7 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full border-2 border-white shadow-sm hover:scale-110 hover:z-10 transition-all duration-300 cursor-pointer"></div>
+                      <div className="w-6 h-6 sm-tablet:w-8 sm-tablet:h-8 tablet:w-7 tablet:h-7 bg-white/90 backdrop-blur-sm rounded-full border-2 border-white flex items-center justify-center shadow-sm hover:scale-110 hover:z-10 transition-all duration-300 cursor-pointer">
+                        <span className="text-gray-800 text-[8px] sm-tablet:text-[10px] tablet:text-[9px] font-bold">+500</span>
                       </div>
                     </div>
                   </div>
