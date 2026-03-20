@@ -1,9 +1,11 @@
-import { useState, type ChangeEvent, type FormEvent } from 'react';
+import { useState, useRef, type ChangeEvent, type FormEvent } from 'react';
 import { MapPin, Send, Instagram, Linkedin } from 'lucide-react';
 import { toast } from 'react-toastify';
 import axiosInstance from '../../api/axios';
+import { Spotlight } from '../../components/core/spotlight';
 
 export default function Contact() {
+  const formSectionRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     firstName: '',
@@ -46,8 +48,10 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen">
-      <section className="bg-gradient-to-br from-[#0b0b3b] via-[#0b0b3b] to-[#0a2fb8] pt-24 md:pt-28 lg:pt-32 xl:pt-40 pb-16">
-        <div className="px-6 md:px-10 lg:px-12 xl:px-16 max-w-6xl xl:max-w-7xl mx-auto">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#2563EB] via-[#1e40af] to-[#1e3a8a] pt-24 md:pt-28 lg:pt-32 xl:pt-40 pb-16 antialiased rounded-b-[32px] md:rounded-b-[40px] lg:rounded-b-[48px]">
+        <Spotlight className="-top-40 left-0 md:-top-20 md:left-60" fill="white" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/[0.04] via-transparent to-white/[0.02]" />
+        <div className="relative z-10 px-6 md:px-10 lg:px-12 xl:px-16 max-w-6xl xl:max-w-7xl mx-auto">
           <div className="mb-8 md:mb-12">
             <h1 className="text-white text-[40px] md:text-[56px] lg:text-[72px] font-bold mb-4">Contact</h1>
             <p className="text-white/80 text-[14px] md:text-[16px] max-w-3xl">
@@ -96,9 +100,37 @@ export default function Contact() {
             Please fill out the form below to have all your questions answered.
           </p>
         </div>
+
+          {/* Bouncing Arrow */}
+          <div className="absolute bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+            <button
+              onClick={() => {
+                formSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="flex flex-col items-center gap-2 text-white/80 hover:text-white transition cursor-pointer group"
+              aria-label="Scroll to contact form"
+            >
+              <span className="text-[12px] md:text-[13px] group-hover:text-white transition">Get In Touch</span>
+              <svg
+                className="w-5 h-5 md:w-6 md:h-6 animate-[bounce-arrow_2s_ease-in-out_infinite]"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                />
+              </svg>
+            </button>
+          </div>
       </section>
 
       <section className="bg-white py-12 md:py-16">
+          <div ref={formSectionRef}>
         <div className="px-6 md:px-10 lg:px-12 xl:px-16 max-w-6xl xl:max-w-7xl mx-auto">
           <div className="max-w-3xl mx-auto bg-white border border-gray-200 rounded-[18px] md:rounded-[22px] shadow-xl p-6 md:p-8">
             <h2 className="text-[20px] md:text-[24px] font-bold text-gray-900 mb-4">Get In Touch</h2>
@@ -255,6 +287,7 @@ export default function Contact() {
             </div>
           </div>
         </div>
+          </div>
       </section>
     </div>
   );

@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { ChevronDown, X, Eye, Tag, Loader, Package2 } from 'lucide-react';
 import { toast } from 'react-toastify';
+import { useSearchParams } from 'react-router-dom';
+import { AnimatePresence, motion } from 'motion/react';
 import axiosInstance from '../../api/axios';
 import { useDemoRequest } from '../../context/DemoRequestContext';
 
@@ -31,6 +33,8 @@ interface TreeNode {
 }
 
 export default function Products() {
+  const [searchParams] = useSearchParams();
+  const querySearchTerm = (searchParams.get('q') || '').trim();
   const { openDemoRequest } = useDemoRequest();
   const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [treeData, setTreeData] = useState<TreeNode[]>([]);
@@ -40,7 +44,7 @@ export default function Products() {
   // Filters and sorting
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState(querySearchTerm);
   const [sortBy, setSortBy] = useState<'date-desc' | 'date-asc' | 'name-asc' | 'name-desc'>('date-desc');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
@@ -153,6 +157,11 @@ export default function Products() {
   useEffect(() => {
     buildTree();
   }, []);
+
+  useEffect(() => {
+    setSearchTerm(querySearchTerm);
+    setCurrentPage(1);
+  }, [querySearchTerm]);
 
   const uniqueTags = Array.from(
     new Set(
@@ -478,7 +487,7 @@ export default function Products() {
                       </h4>
 
                       {/* Description Overview */}
-                      <p className="text-[12px] md:text-[13px] text-gray-600 line-clamp-2 min-h-[2.4em]">
+                      <p className="text-[12px] md:text-[13px] text-gray-600 line-clamp-2 min-h-[2.4em] whitespace-break-spaces break-words">
                         {product.description}
                       </p>
 
@@ -486,16 +495,16 @@ export default function Products() {
                       <div className="flex items-center gap-2 pt-3 border-t border-gray-200">
                         <button
                           onClick={() => openDemoRequest(product.title)}
-                          className="flex-1 px-3 md:px-4 py-2.5 bg-white border-2 border-blue-600 text-blue-600 rounded-[10px] text-[12px] font-bold hover:bg-blue-50 hover:scale-[1.02] transition-all"
+                          className="flex-1 px-2.5 md:px-3 py-2.5 bg-white border-2 border-blue-600 text-blue-600 rounded-[10px] text-[11px] md:text-[12px] font-bold hover:bg-blue-50 hover:scale-[1.02] transition-all whitespace-nowrap"
                         >
-                          Request Demo
+                          Get Demo
                         </button>
                         <button
                           onClick={() => handleProductDetail(product)}
-                          className="flex-1 px-3 md:px-4 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-[10px] text-[12px] font-bold hover:shadow-lg hover:scale-[1.02] transition-all flex items-center justify-center gap-1"
+                          className="flex-1 px-2.5 md:px-3 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-[10px] text-[11px] md:text-[12px] font-bold hover:shadow-lg hover:scale-[1.02] transition-all flex items-center justify-center gap-1 whitespace-nowrap"
                         >
                           <Eye className="w-3 md:w-4 h-3 md:h-4" />
-                          Full View
+                          Details
                         </button>
                       </div>
                     </div>
@@ -552,9 +561,21 @@ export default function Products() {
       </div>
 
       {/* Product Detail Modal */}
-      {showDetailModal && selectedProduct && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
-          <div className="bg-white rounded-[20px] md:rounded-[28px] max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+      <AnimatePresence>
+        {showDetailModal && selectedProduct && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 40, filter: 'blur(8px)' }}
+              animate={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, scale: 0.95, y: 40, filter: 'blur(8px)' }}
+              transition={{ type: 'spring', bounce: 0.05, duration: 0.25 }}
+              className="bg-white rounded-[20px] md:rounded-[28px] max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+            >
             {/* Modal Header */}
             <div className="sticky top-0 bg-white border-b-2 border-gray-100 p-4 md:p-6 flex items-center justify-between rounded-t-[20px] md:rounded-t-[28px]">
               <h2 className="font-bold text-[18px] md:text-[22px] text-gray-900 truncate flex-1">{selectedProduct.title}</h2>
@@ -563,6 +584,8 @@ export default function Products() {
                   setShowDetailModal(false);
                   setSelectedProduct(null);
                 }}
+                aria-label="Close product details"
+                title="Close"
                 className="flex-shrink-0 p-1.5 md:p-2 hover:bg-gray-100 rounded-lg transition-all ml-2"
               >
                 <X className="w-5 md:w-6 h-5 md:h-6 text-gray-600" />
@@ -573,7 +596,12 @@ export default function Products() {
             <div className="p-4 md:p-6 space-y-6">
               {/* Images Gallery */}
               {selectedProduct.images && selectedProduct.images.length > 0 && (
-                <div className="space-y-3">
+                <motion.div
+                  initial={{ opacity: 0.85, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ type: 'spring', bounce: 0.05, duration: 0.25 }}
+                  className="space-y-3"
+                >
                   <h3 className="font-bold text-[14px] md:text-[16px] text-gray-900">Product Images</h3>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                     {selectedProduct.images.map((image, idx) => (
@@ -582,14 +610,20 @@ export default function Products() {
                       </div>
                     ))}
                   </div>
-                </div>
+                </motion.div>
               )}
 
               {/* Product Info */}
-              <div className="space-y-4">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8, y: 100 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.8, y: 100 }}
+                transition={{ type: 'spring', bounce: 0.05, duration: 0.25 }}
+                className="space-y-4"
+              >
                 <div>
                   <h3 className="font-bold text-[14px] md:text-[16px] text-gray-900 mb-2">Description</h3>
-                  <p className="text-[12px] md:text-[14px] text-gray-600 leading-relaxed">{selectedProduct.description}</p>
+                  <p className="text-[12px] md:text-[14px] text-gray-600 leading-relaxed whitespace-break-spaces break-words">{selectedProduct.description}</p>
                 </div>
 
                 {/* Tags */}
@@ -611,7 +645,7 @@ export default function Products() {
                   <h3 className="font-bold text-[14px] md:text-[16px] text-gray-900 mb-2">Added On</h3>
                   <p className="text-[12px] md:text-[14px] text-gray-600">{formatDate(selectedProduct.createdAt)}</p>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Action Buttons */}
               <div className="flex gap-3 pt-4 border-t border-gray-200">
@@ -635,9 +669,10 @@ export default function Products() {
                 </button>
               </div>
             </div>
-          </div>
-        </div>
-      )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

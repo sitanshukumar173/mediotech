@@ -19,12 +19,10 @@ import CreateAdmin from './admin/pages/CreateAdmin';
 import ProductManagement from './admin/pages/ProductManagement';
 import ContactManagement from './admin/pages/ContactManagement';
 import DemoRequestManagement from './admin/pages/DemoRequestManagement';
-import { DemoRequestProvider } from './context/DemoRequestContext';
 
 function App() {
   return (
     <AuthProvider>
-      <DemoRequestProvider>
         <BrowserRouter>
           <Routes>
           {/* Public Routes */}
@@ -68,7 +66,6 @@ function App() {
           theme="light"
         />
         </BrowserRouter>
-      </DemoRequestProvider>
     </AuthProvider>
   )
 }

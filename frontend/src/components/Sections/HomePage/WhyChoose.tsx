@@ -1,4 +1,6 @@
 import { CheckCircle2 } from 'lucide-react';
+import { InfiniteSlider } from '../../core/infinite-slider';
+import { ProgressiveBlur } from '../../core/progressive-blur';
 
 const reasons = [
   {
@@ -42,12 +44,19 @@ export default function WhyChoose() {
             Trusted by healthcare providers for reliability, innovation, and exceptional support
           </p>
         </div>
-        
-        <div className="flex flex-wrap justify-center gap-3 md:gap-4 lg:gap-5 xl:gap-6">
+      </div>
+
+      <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden">
+        <InfiniteSlider
+          gap={32}
+          speed={95}
+          speedOnHover={20}
+          className="w-full px-8 md:px-14 lg:px-20 xl:px-28"
+        >
           {reasons.map((reason, index) => (
             <div
               key={index}
-              className="group bg-white border-2 border-gray-100 rounded-[20px] md:rounded-[28px] lg:rounded-[32px] p-5 md:p-7 lg:p-9 hover:border-blue-200 hover:shadow-xl transition-all duration-500 hover:-translate-y-2 w-full md:w-[calc(50%-0.5rem)] lg:w-[calc(25%-0.75rem)] xl:w-[calc(25%-0.9rem)]"
+              className="group bg-white border-2 border-gray-100 rounded-[20px] md:rounded-[28px] lg:rounded-[32px] p-5 md:p-7 lg:p-9 hover:border-blue-200 transition-colors duration-500 w-[280px] md:w-[330px] lg:w-[360px] xl:w-[380px] shrink-0"
             >
               <div className={`inline-flex items-center justify-center w-11 md:w-14 lg:w-16 xl:w-18 h-11 md:h-14 lg:h-16 xl:h-18 bg-gradient-to-br ${reason.color} rounded-[16px] md:rounded-[20px] lg:rounded-[22px] mb-3 md:mb-4 lg:mb-6 shadow-lg group-hover:scale-110 transition-transform`}>
                 <CheckCircle2 className="w-6 md:w-7 lg:w-8 xl:w-9 h-6 md:h-7 lg:h-8 xl:h-9 text-white" />
@@ -56,7 +65,18 @@ export default function WhyChoose() {
               <p className="text-[11px] md:text-[12px] lg:text-[13px] xl:text-[15px] text-gray-600 leading-relaxed">{reason.description}</p>
             </div>
           ))}
-        </div>
+        </InfiniteSlider>
+
+        <ProgressiveBlur
+          className="pointer-events-none absolute -left-px top-0 h-full w-28 md:w-40 lg:w-52 bg-gradient-to-r from-slate-200 via-slate-200/85 to-transparent"
+          direction="left"
+          blurIntensity={1.2}
+        />
+        <ProgressiveBlur
+          className="pointer-events-none absolute -right-px top-0 h-full w-28 md:w-40 lg:w-52 bg-gradient-to-l from-slate-200 via-slate-200/85 to-transparent"
+          direction="right"
+          blurIntensity={1.2}
+        />
       </div>
     </section>
   );

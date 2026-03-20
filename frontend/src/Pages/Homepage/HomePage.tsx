@@ -9,7 +9,7 @@ import ProvenScale from "../../components/Sections/HomePage/ProvenScale"
 import Resources from "../../components/Sections/HomePage/Resources"
 import StatsBanner from "../../components/Sections/HomePage/StatsBanner"
 import { TrustedInstitutes } from "../../components/Sections/HomePage/TrustedInstitutes"
-import WeAre from "../../components/Sections/HomePage/WeAre"
+// import WeAre from "../../components/Sections/HomePage/WeAre"
 import WhyChoose from "../../components/Sections/HomePage/WhyChoose"
 
 function HomePage() {
@@ -23,7 +23,7 @@ function HomePage() {
     <ProductPortfolio/>
     <TrustedInstitutes/>
     <StatsBanner/>
-    <WeAre/>
+    {/* <WeAre/> */}
     <Resources/>
     <AboutSection/>
     <ContactCTA/>
