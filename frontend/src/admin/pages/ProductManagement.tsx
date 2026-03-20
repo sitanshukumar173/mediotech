@@ -516,7 +516,7 @@ export default function ProductManagement() {
             <div className="flex items-start justify-between mb-6">
               <div>
                 <h2 className="text-2xl font-bold text-gray-900">{selectedProduct.title}</h2>
-                <p className="text-sm text-gray-600 mt-2">{selectedProduct.description}</p>
+                <p className="text-sm text-gray-600 mt-2 whitespace-break-spaces break-words">{selectedProduct.description}</p>
               </div>
               <div className="flex gap-2">
                 <button

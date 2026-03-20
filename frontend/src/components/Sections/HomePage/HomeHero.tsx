@@ -221,6 +221,8 @@ export function HomeHero() {
 
                                   <button
                                     onClick={() => handleNavigate(featuredItems[currentSlide].link)}
+                                    aria-label="Open featured item"
+                                    title="Open featured item"
                                     className="group/arrow flex-shrink-0 w-6 h-6 sm-mobile:w-7 sm-mobile:h-7 md:w-10 md:h-10 lg:w-10 lg:h-10 bg-white border-2 border-gray-200 text-gray-900 rounded-full flex items-center justify-center hover:border-blue-300 hover:shadow-lg transition-all duration-300"
                                   >
                                     <ArrowRight className="w-3 h-3 sm-mobile:w-3.5 sm-mobile:h-3.5 md:w-4 md:h-4 lg:w-4 lg:h-4 text-blue-600 group-hover/arrow:translate-x-0.5 transition-transform relative z-10" />
@@ -247,6 +249,8 @@ export function HomeHero() {
                         <button
                           key={idx}
                           onClick={() => handleSlideChange(idx)}
+                          aria-label={`Go to slide ${idx + 1}`}
+                          title={`Slide ${idx + 1}`}
                           className={`w-2 rounded-full transition-all duration-500 ${
                             idx === currentSlide
                               ? 'h-7 bg-gradient-to-b from-[#1d4ed8] to-[#2563EB] shadow-lg shadow-blue-400/40'

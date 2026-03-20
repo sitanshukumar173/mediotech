@@ -1,15 +1,38 @@
 import { ArrowRight } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { AnimatedNumber } from '../../core/animated-number';
 
 export default function StatsBanner() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [animateStats, setAnimateStats] = useState(false);
+
   const stats = [
-    { number: '500+', label: 'Healthcare Facilities', gradient: 'from-[#3b82f6] to-[#2563EB]' },
-    { number: '15+', label: 'Years of Excellence', gradient: 'from-[#60a5fa] to-[#3b82f6]' },
-    { number: '50+', label: 'Product Variants', gradient: 'from-[#2563EB] to-[#1d4ed8]' },
-    { number: '98%', label: 'Customer Satisfaction', gradient: 'from-[#ef4444] to-[#dc2626]' },
+    { value: 500, suffix: '+', label: 'Healthcare Facilities' },
+    { value: 15, suffix: '+', label: 'Years of Excellence' },
+    { value: 50, suffix: '+', label: 'Product Variants' },
+    { value: 98, suffix: '%', label: 'Customer Satisfaction' },
   ];
 
+  useEffect(() => {
+    if (!sectionRef.current || animateStats) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setAnimateStats(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.35 },
+    );
+
+    observer.observe(sectionRef.current);
+
+    return () => observer.disconnect();
+  }, [animateStats]);
+
   return (
-    <section className="py-10 md:py-12 lg:py-14 xl:py-16 2xl:py-16 my-8 md:my-10 lg:my-12 xl:my-16">
+    <section ref={sectionRef} className="py-10 md:py-12 lg:py-14 xl:py-16 2xl:py-16 my-8 md:my-10 lg:my-12 xl:my-16">
       <div className="px-5 md:px-8 lg:px-8 xl:px-14 2xl:px-16 max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto">
         <div className="bg-gradient-to-br from-[#2563EB] via-[#1e40af] to-[#1e3a8a] relative overflow-hidden rounded-[40px] md:rounded-[48px] lg:rounded-[56px] xl:rounded-[60px] py-10 md:py-12 lg:py-14 xl:py-16 2xl:py-20 px-5 md:px-6 lg:px-8">
           {/* Decorative elements */}
@@ -35,13 +58,21 @@ export default function StatsBanner() {
           </p>
         </div>
         
-        <div className="flex flex-wrap justify-center gap-3 md:gap-4 lg:gap-5 xl:gap-6">
+        <div className="flex flex-wrap items-start justify-center gap-x-8 gap-y-5 md:gap-x-10 md:gap-y-6 lg:gap-x-12 lg:gap-y-7">
           {stats.map((stat, index) => (
-            <div key={index} className="group text-center w-full md:w-[calc(50%-0.5rem)] lg:w-[calc(25%-0.75rem)]">
-              <div className={`inline-flex items-center justify-center w-16 md:w-20 lg:w-24 xl:w-28 2xl:w-28 h-16 md:h-20 lg:h-24 xl:h-28 2xl:h-28 bg-gradient-to-br ${stat.gradient} rounded-[16px] md:rounded-[20px] lg:rounded-[24px] mb-3 md:mb-4 lg:mb-5 xl:mb-6 shadow-2xl group-hover:scale-110 group-hover:shadow-3xl transition-all duration-300 backdrop-blur-sm`}>
-                <span className="text-[20px] md:text-[24px] lg:text-[32px] xl:text-[40px] 2xl:text-[40px] font-bold text-white">{stat.number}</span>
+            <div key={index} className="text-center min-w-[140px] md:min-w-[170px] lg:min-w-[190px]">
+              <div className="text-[20px] md:text-[24px] lg:text-[30px] xl:text-[36px] font-bold text-white leading-none mb-1.5 md:mb-2">
+                <AnimatedNumber
+                  className="inline"
+                  springOptions={{
+                    bounce: 0,
+                    duration: 2000,
+                  }}
+                  value={animateStats ? stat.value : 0}
+                />
+                {stat.suffix}
               </div>
-              <div className="text-[12px] md:text-[13px] lg:text-[15px] xl:text-[16px] text-white font-semibold">{stat.label}</div>
+              <div className="text-[12px] md:text-[13px] lg:text-[15px] xl:text-[16px] text-blue-100 font-semibold leading-snug">{stat.label}</div>
             </div>
           ))}
         </div>

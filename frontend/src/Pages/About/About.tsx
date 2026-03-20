@@ -6,18 +6,21 @@ export default function About() {
       name: 'Utkarsh Dubey',
       role: 'Founder | CEO | MD',
       id: '01190725',
+      image: 'https://res.cloudinary.com/dlpluej6w/image/upload/v1774001988/Utkarsh_Dubey_jxkbpp.jpg',
       description: 'Bringing innovation and vision to transforming healthcare through innovation. A leader with the ability to dream, and execute impactful solutions. Committed to pushing innovative technologies into patient care to make care accessible and efficient.'
     },
     {
       name: 'Keshav Kumar',
       role: 'Executive Director | CFO',
       id: '02190725',
+      image: 'https://res.cloudinary.com/dlpluej6w/image/upload/v1774001990/Keshav_Kumar_sooe4z.png',
       description: 'Experienced professional with a solid business background with deep expertise in finance, strategic planning. Adept at resource optimization and ensuring financial sustainability with growth. Mediotech Solutions towards growth and profitability.'
     },
     {
       name: 'Samarth Agarwal',
       role: 'Director | COO',
       id: '03190725',
+      image: 'https://res.cloudinary.com/dlpluej6w/image/upload/v1774001988/Samarth_Agarwal_et6um0.jpg',
       description: 'Biotechnology student turned operations and stakeholder management, team coordination, and stakeholder engagement. Strong relationship-building combined with expertise in research and market insights make him an essential contributor to development and extension.'
     }
   ];
@@ -27,24 +30,28 @@ export default function About() {
       name: 'Vidushi Rastogi',
       role: 'Content & Corporate Presentation Associate',
       id: '04190725',
+      image: 'https://res.cloudinary.com/dlpluej6w/image/upload/v1774001987/Vidushi_Rastogi_eecmwe.jpg',
       email: 'vidushirastogi5005@gmail.com'
     },
     {
       name: 'Siddarth Mishra',
       role: 'R&D Manager',
       id: '05190725',
+      image: 'https://res.cloudinary.com/dlpluej6w/image/upload/v1774001989/Siddarth_Mishra_dxz7sp.png',
       email: 'siddharth.20.mishra@gmail.com'
     },
     {
       name: 'Manas Pratap',
       role: 'Assistant Manager',
       id: '08190725',
+      image: 'https://res.cloudinary.com/dlpluej6w/image/upload/v1774001987/Manas_Pratap_tw1n7v.jpg',
       email: 'pratapsinghmanas@gmail.com'
     },
     {
       name: 'Shashwat',
       role: 'Executive Assistant',
       id: '07190725',
+      image: 'https://res.cloudinary.com/dlpluej6w/image/upload/v1774001987/Shashwat_pt2zn3.jpg',
       email: 'upadhyayashashwat02@gmail.com'
     }
   ];
@@ -286,15 +293,20 @@ export default function About() {
                 key={idx}
                 className="group bg-white/70 backdrop-blur-xl border-2 border-white/80 rounded-[20px] md:rounded-[24px] lg:rounded-[28px] xl:rounded-[32px] p-5 md:p-6 lg:p-7 shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1.167rem)]"
               >
-                {/* Profile Image Placeholder */}
-                <div className="w-20 md:w-24 lg:w-28 h-20 md:h-24 lg:h-28 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-5 shadow-lg group-hover:scale-105 transition-transform">
-                  <UserCircle className="w-16 md:w-20 lg:w-24 h-16 md:h-20 lg:h-24 text-blue-600" />
+                {/* Profile Image */}
+                <div className="w-20 md:w-24 lg:w-28 h-20 md:h-24 lg:h-28 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-5 shadow-lg group-hover:scale-105 transition-transform overflow-hidden">
+                  {leader.image ? (
+                    <img src={leader.image} alt={leader.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
+                      <UserCircle className="w-16 md:w-20 lg:w-24 h-16 md:h-20 lg:h-24 text-blue-600" />
+                    </div>
+                  )}
                 </div>
                 
                 <div className="text-center">
                   <h3 className="text-[16px] md:text-[18px] lg:text-[20px] font-bold text-gray-900 mb-1.5 md:mb-2">{leader.name}</h3>
                   <p className="text-[10px] md:text-[11px] lg:text-[12px] font-bold text-[#2563EB] mb-1">{leader.role}</p>
-                  <p className="text-[8px] md:text-[9px] lg:text-[10px] text-gray-500 mb-2.5 md:mb-3">Id: {leader.id}</p>
                   <p className="text-[11px] md:text-[12px] lg:text-[13px] text-gray-600 leading-relaxed">{leader.description}</p>
                 </div>
               </div>
@@ -319,14 +331,19 @@ export default function About() {
                 key={idx}
                 className="bg-white/70 backdrop-blur-xl border-2 border-white/80 rounded-[16px] md:rounded-[20px] lg:rounded-[24px] xl:rounded-[28px] p-3 md:p-4 lg:p-6 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-center w-full md:w-[calc(50%-0.525rem)] lg:w-[calc(33.333%-0.833rem)] xl:w-[calc(25%-1.125rem)]"
               >
-                {/* Profile Image Placeholder */}
-                <div className="w-16 md:w-18 lg:w-20 h-16 md:h-18 lg:h-20 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center mx-auto mb-2 md:mb-2.5 lg:mb-3.5 shadow-md">
-                  <UserCircle className="w-12 md:w-14 lg:w-14 h-12 md:h-14 lg:h-14 text-blue-600" />
+                {/* Profile Image */}
+                <div className="w-16 md:w-18 lg:w-20 h-16 md:h-18 lg:h-20 rounded-full flex items-center justify-center mx-auto mb-2 md:mb-2.5 lg:mb-3.5 shadow-md overflow-hidden">
+                  {member.image ? (
+                    <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
+                      <UserCircle className="w-12 md:w-14 lg:w-14 h-12 md:h-14 lg:h-14 text-blue-600" />
+                    </div>
+                  )}
                 </div>
                 
                 <h4 className="text-[12px] md:text-[14px] lg:text-[16px] font-bold text-gray-900 mb-1 md:mb-1.5">{member.name}</h4>
                 <p className="text-[8px] md:text-[9px] lg:text-[10px] font-semibold text-[#2563EB] mb-1.5 md:mb-2 line-clamp-2">{member.role}</p>
-                <p className="text-[7px] md:text-[8px] lg:text-[9px] text-gray-500 mb-1 md:mb-1.5">Id: {member.id}</p>
                 <a href={`mailto:${member.email}`} className="text-[7px] md:text-[8px] lg:text-[9px] text-blue-600 hover:underline break-all block line-clamp-1">
                   {member.email}
                 </a>

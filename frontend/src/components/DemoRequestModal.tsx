@@ -1,6 +1,7 @@
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react';
 import { X, Send } from 'lucide-react';
 import { toast } from 'react-toastify';
+import { AnimatePresence, motion, type Transition, type Variants } from 'motion/react';
 import axiosInstance from '../api/axios';
 
 interface DemoRequestModalProps {
@@ -59,11 +60,52 @@ export default function DemoRequestModal({ isOpen, onClose, presetProduct = '' }
     }
   };
 
-  if (!isOpen) return null;
+  const customVariants: Variants = {
+    initial: {
+      scale: 0.9,
+      filter: 'blur(10px)',
+      y: '100%',
+      opacity: 0,
+    },
+    animate: {
+      scale: 1,
+      filter: 'blur(0px)',
+      y: 0,
+      opacity: 1,
+    },
+    exit: {
+      scale: 0.96,
+      filter: 'blur(6px)',
+      y: '20%',
+      opacity: 0,
+    },
+  };
+
+  const customTransition: Transition = {
+    type: 'spring',
+    bounce: 0,
+    duration: 0.4,
+  };
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-      <div className="bg-white rounded-[18px] md:rounded-[22px] w-full max-w-2xl shadow-2xl">
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+          onClick={onClose}
+        >
+          <motion.div
+            variants={customVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={customTransition}
+            onClick={(e) => e.stopPropagation()}
+            className="bg-white rounded-[18px] md:rounded-[22px] w-full max-w-2xl shadow-2xl"
+          >
         <div className="flex items-center justify-between px-5 md:px-6 py-4 border-b border-gray-200">
           <div>
             <h3 className="text-[18px] md:text-[20px] font-bold text-gray-900">Request a Demo</h3>
@@ -201,7 +243,9 @@ export default function DemoRequestModal({ isOpen, onClose, presetProduct = '' }
             <Send className="w-4 h-4" />
           </button>
         </form>
-      </div>
-    </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

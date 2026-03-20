@@ -1,4 +1,6 @@
 import { Building2 } from 'lucide-react';
+import { InfiniteSlider } from '../../core/infinite-slider';
+import { ProgressiveBlur } from '../../core/progressive-blur';
 
 const institutions = [
   { name: 'AIIMS Delhi', location: 'New Delhi' },
@@ -30,12 +32,19 @@ export function TrustedInstitutes() {
             Our medical equipment serves premier healthcare facilities across India
           </p>
         </div>
-        
-        <div className="flex flex-wrap justify-center gap-3 md:gap-4 lg:gap-5 xl:gap-6">
+      </div>
+
+      <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden">
+        <InfiniteSlider
+          gap={32}
+          speed={95}
+          speedOnHover={20}
+          className="w-full px-8 md:px-14 lg:px-20 xl:px-28"
+        >
           {institutions.map((institution, index) => (
             <div
               key={index}
-              className="bg-white border-2 border-gray-100 rounded-[18px] md:rounded-[24px] lg:rounded-[26px] xl:rounded-[28px] p-3 md:p-4 lg:p-5 xl:p-7 hover:border-blue-200 hover:shadow-lg transition-all duration-500 hover:-translate-y-1 group w-full md:w-[calc(50%-0.5rem)] lg:w-[calc(25%-0.75rem)] xl:w-[calc(25%-0.9rem)]"
+              className="group bg-white border-2 border-gray-100 rounded-[18px] md:rounded-[24px] lg:rounded-[26px] xl:rounded-[28px] p-3 md:p-4 lg:p-5 xl:p-7 hover:border-blue-200 transition-colors duration-500 w-[280px] md:w-[330px] lg:w-[360px] xl:w-[380px] shrink-0"
             >
               <div className="flex items-start gap-2 md:gap-3 lg:gap-4">
                 <div className="w-9 md:w-10 lg:w-12 xl:w-14 h-9 md:h-10 lg:h-12 xl:h-14 bg-gradient-to-br from-[#2563EB] to-[#1d4ed8] rounded-[14px] md:rounded-[16px] lg:rounded-[18px] xl:rounded-[20px] flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-110 transition-transform">
@@ -48,7 +57,18 @@ export function TrustedInstitutes() {
               </div>
             </div>
           ))}
-        </div>
+        </InfiniteSlider>
+
+        <ProgressiveBlur
+          className="pointer-events-none absolute -left-px top-0 h-full w-28 md:w-40 lg:w-52 bg-gradient-to-r from-white via-white/85 to-transparent"
+          direction="left"
+          blurIntensity={1.2}
+        />
+        <ProgressiveBlur
+          className="pointer-events-none absolute -right-px top-0 h-full w-28 md:w-40 lg:w-52 bg-gradient-to-l from-white via-white/85 to-transparent"
+          direction="right"
+          blurIntensity={1.2}
+        />
       </div>
     </section>
   );

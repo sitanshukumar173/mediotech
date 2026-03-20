@@ -1,30 +1,85 @@
-import { ArrowRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axiosInstance from '../../../api/axios';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
-const products = [
-  {
-    title: 'ICU Ventilators',
-    subtitle: 'Respiratory Care',
-    description: 'Advanced mechanical ventilation systems with AI-assisted breathing modes for adult, pediatric, and neonatal patients.',
-    image: 'https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx2ZW50aWxhdG9yJTIwbWVkaWNhbCUyMGVxdWlwbWVudHxlbnwxfHx8fDE3NjU5MTE5NzB8MA&ixlib=rb-4.1.0&q=80&w=1080',
-  },
-  {
-    title: 'Patient Monitors',
-    subtitle: 'Vital Signs',
-    description: 'Multi-parameter monitoring systems with continuous tracking of ECG, SpO2, NIBP, temperature, and respiratory rate.',
-    image: 'https://images.unsplash.com/photo-1581594549595-35f6edc7b762?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwYXRpZW50JTIwbW9uaXRvciUyMG1lZGljYWx8ZW58MXx8fHwxNzY1OTExOTcwfDA&ixlib=rb-4.1.0&q=80&w=1080',
-  },
-  {
-    title: 'Infusion Pumps',
-    subtitle: 'Precision Deliveray',
-    description: 'Smart infusion systems with dose error reduction and comprehensive drug library for safe medication delivery.',
-    image: 'https://images.unsplash.com/photo-1631549916768-4119b2e5f926?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZWRpY2FsJTIwaW5mdXNpb24lMjBwdW1wfGVufDF8fHx8MTc2NTkxMTk3MHww&ixlib=rb-4.1.0&q=80&w=1080',
-  },
-];
+type Product = {
+  _id: string;
+  title: string;
+  description: string;
+  images?: string[];
+};
 
 export default function ProductPortfolio() {
+  const navigate = useNavigate();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [pageIndex, setPageIndex] = useState(0);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axiosInstance.get('/admin/product');
+        const fetched: Product[] = Array.isArray(response.data)
+          ? response.data
+          : response.data?.products || [];
+        setProducts(fetched);
+      } catch (error) {
+        console.error('Failed to load product portfolio:', error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  const totalPages = Math.max(1, Math.ceil(products.length / 2));
+
+  const currentProducts = useMemo(() => {
+    const start = pageIndex * 2;
+    return products.slice(start, start + 2);
+  }, [products, pageIndex]);
+
+  useEffect(() => {
+    if (products.length <= 2) return;
+
+    const intervalId = window.setInterval(() => {
+      setPageIndex((prev) => (prev + 1) % totalPages);
+    }, 5000);
+
+    return () => window.clearInterval(intervalId);
+  }, [products.length, totalPages]);
+
+  const goNext = () => {
+    setPageIndex((prev) => (prev + 1) % totalPages);
+  };
+
+  const goPrevious = () => {
+    setPageIndex((prev) => (prev - 1 + totalPages) % totalPages);
+  };
+
+  const openProductDetails = (title: string) => {
+    navigate(`/products?q=${encodeURIComponent(title)}`);
+  };
+
   return (
     <section id="products" className="py-12 md:py-16 lg:py-20 xl:py-24 2xl:py-28 bg-gradient-to-b from-white to-blue-50/20 relative overflow-hidden">
+      <style>{`
+        @keyframes portfolio-enter-left {
+          from { opacity: 0; transform: translateX(-36px); }
+          to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes portfolio-enter-right {
+          from { opacity: 0; transform: translateX(36px); }
+          to { opacity: 1; transform: translateX(0); }
+        }
+        .portfolio-enter-left {
+          animation: portfolio-enter-left 560ms ease;
+        }
+        .portfolio-enter-right {
+          animation: portfolio-enter-right 560ms ease;
+        }
+      `}</style>
+
       <div className="px-5 md:px-8 lg:px-8 xl:px-14 2xl:px-16 max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-12 md:mb-14 lg:mb-16 xl:mb-20">
           <div className="inline-block mb-3 md:mb-4 lg:mb-7">
@@ -41,41 +96,73 @@ export default function ProductPortfolio() {
             Comprehensive range of medical equipment designed for intensive care units
           </p>
         </div>
-        
-        <div className="flex flex-wrap justify-center gap-3 md:gap-4 lg:gap-5">
-          {products.map((product, index) => (
-            <div
-              key={index}
-              className="group bg-white rounded-[32px] overflow-hidden border-2 border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-500 hover:-translate-y-2 w-full md:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.834rem)]"
-            >
-              {/* Image */}
-              <div className="relative h-32 md:h-40 lg:h-48 xl:h-56 overflow-hidden">
-                <ImageWithFallback
-                  src={product.image}
-                  alt={product.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                
-                {/* Badge */}
-                <div className="absolute top-3 md:top-4 lg:top-5 right-3 md:right-4 lg:right-5 bg-white rounded-full px-3 md:px-4 py-1.5 md:py-2 shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 border-2 border-white/50">
-                  <span className="text-[9px] md:text-[10px] lg:text-[11px] font-bold text-[#2563EB] uppercase tracking-wider">{product.subtitle}</span>
+        <div key={pageIndex} className="space-y-10 md:space-y-12 lg:space-y-14">
+          {currentProducts.map((product, index) => {
+            const imageFirst = index % 2 === 0;
+            const imageUrl = product.images?.[0] || 'https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080';
+
+            return (
+              <div
+                key={product._id}
+                className={`grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-10 items-center ${
+                  imageFirst ? 'portfolio-enter-left' : 'portfolio-enter-right'
+                }`}
+              >
+                <div className={imageFirst ? 'order-1' : 'order-1 lg:order-2'}>
+                  <div className="group relative rounded-[20px] md:rounded-[24px] lg:rounded-[26px] p-[1px] bg-gradient-to-br from-blue-200/70 via-white to-slate-200/80 shadow-[0_18px_40px_-20px_rgba(37,99,235,0.45)]">
+                    <div className="relative overflow-hidden rounded-[20px] md:rounded-[24px] lg:rounded-[26px] bg-white">
+                      <ImageWithFallback
+                        src={imageUrl}
+                        alt={product.title}
+                        className="w-full h-[210px] md:h-[260px] lg:h-[290px] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      />
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0a2348]/20 via-transparent to-transparent" />
+                    </div>
+                  </div>
+                </div>
+
+                <div className={imageFirst ? 'order-2' : 'order-2 lg:order-1'}>
+                  <h3 className="text-[24px] md:text-[28px] lg:text-[34px] font-bold text-[#0a2348] leading-tight mb-2 md:mb-3">
+                    {product.title}
+                  </h3>
+                  <p className="text-[12px] md:text-[13px] lg:text-[14px] text-gray-600 max-w-lg leading-relaxed mb-4 md:mb-5 line-clamp-3">
+                    {product.description}
+                  </p>
+                  <button
+                    onClick={() => openProductDetails(product.title)}
+                    className="inline-flex items-center gap-2 bg-gradient-to-r from-[#2563EB] to-[#1d4ed8] text-white px-5 py-2.5 rounded-[10px] font-semibold text-[12px] md:text-[13px] hover:shadow-lg transition-all"
+                  >
+                    View Details
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
                 </div>
               </div>
-              
-              <div className="p-4 md:p-5 lg:p-6">
-                <div className="text-[9px] md:text-[10px] lg:text-[11px] font-bold text-[#2563EB] mb-2 md:mb-3 uppercase tracking-[0.15em]">{product.subtitle}</div>
-                <h3 className="text-[15px] md:text-[18px] lg:text-[22px] xl:text-[26px] font-bold text-gray-900 mb-2 md:mb-3 leading-tight">{product.title}</h3>
-                <p className="text-[12px] md:text-[13px] lg:text-[14px] text-gray-600 mb-4 md:mb-5 lg:mb-6 leading-relaxed">{product.description}</p>
-                
-                <button className="group/btn flex items-center gap-2 md:gap-3 text-white bg-gradient-to-r from-[#2563EB] to-[#1d4ed8] px-4 md:px-5 lg:px-6 py-2 md:py-2.5 lg:py-3 rounded-full font-bold text-[11px] md:text-[12px] lg:text-[13px] xl:text-[14px] shadow-lg shadow-blue-200/50 hover:shadow-xl hover:shadow-blue-300/50 hover:-translate-y-1 transition-all w-full justify-center">
-                  Learn More
-                  <ArrowRight className="w-4 md:w-4.5 lg:w-5 h-4 md:h-4.5 lg:h-5 group-hover/btn:translate-x-1 transition-transform" />
-                </button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
+
+        {products.length > 2 && (
+          <div className="flex justify-center items-center gap-3 mt-8 md:mt-10 lg:mt-12">
+            <button
+              onClick={goPrevious}
+              aria-label="Previous products"
+              className="w-10 h-10 rounded-full border-2 border-blue-300 text-blue-600 hover:bg-blue-50 transition-colors inline-flex items-center justify-center"
+            >
+              <ArrowLeft className="w-4 h-4" />
+            </button>
+            <button
+              onClick={goNext}
+              aria-label="Next products"
+              className="w-10 h-10 rounded-full border-2 border-blue-300 text-blue-600 hover:bg-blue-50 transition-colors inline-flex items-center justify-center"
+            >
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        )}
+
+        {products.length === 0 && (
+          <div className="text-center text-gray-500 text-[14px] md:text-[15px] font-medium">No products available right now.</div>
+        )}
       </div>
     </section>
   );
