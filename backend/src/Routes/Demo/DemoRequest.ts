@@ -2,6 +2,7 @@ import { Router, Request, Response } from "express";
 import { z } from "zod";
 import { DemoRequestModel } from "../../db";
 import { AdminMiddleware } from "../../middleware";
+import { sendMail } from "../../nodemailer";
 
 const DemoRequestRouter = Router();
 
@@ -30,6 +31,16 @@ DemoRequestRouter.post("/demo", async (req: Request, res: Response) => {
 
     const demoRequest = new DemoRequestModel(parsed.data);
     await demoRequest.save();
+
+    const text = Object.entries(parsed.data)
+      .map(([key, val]) => `<b>${key}:</b> ${val}<br>`)
+      .join("\n");
+
+    const html = Object.entries(parsed.data)
+      .map(([key, val]) => `<h3>${key}</h3>: ${val}`)
+      .join("");
+    //nodemailer
+    await sendMail(text, html, "Demo Request Message");
 
     return res.status(201).json({
       message: "Demo request submitted successfully",
