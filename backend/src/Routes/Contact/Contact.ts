@@ -2,6 +2,7 @@ import { Router, Request, Response } from "express";
 import { z } from "zod";
 import { ContactModel } from "../../db";
 import { AdminMiddleware } from "../../middleware";
+import { sendMail } from "../../nodemailer";
 
 const ContactRouter = Router();
 
@@ -28,6 +29,16 @@ ContactRouter.post("/contact", async (req: Request, res: Response) => {
 
     const contact = new ContactModel(parsed.data);
     await contact.save();
+
+    const text = Object.entries(parsed.data)
+      .map(([key, val]) => `<b>${key}:</b> ${val}<br>`)
+      .join("\n");
+
+    const html = Object.entries(parsed.data)
+      .map(([key, val]) => `<h3>${key}</h3>: ${val}`)
+      .join("");
+    //nodemailer
+    await sendMail(text, html, "Contact Message");
 
     return res.status(201).json({
       message: "Contact request submitted successfully",
