@@ -1,5 +1,6 @@
 import { Target, Eye, Award, Shield, Globe, Users, Heart, Zap, CheckCircle, UserCircle } from 'lucide-react';
 import { useState } from 'react';
+import { TrustedInstitutes } from '../../components/Sections/HomePage/TrustedInstitutes';
 
 export default function About() {
   const [hoveredCard, setHoveredCard] = useState<'conveyor' | 'sachet' | null>(null);
@@ -298,10 +299,17 @@ export default function About() {
             <p className="text-[12px] md:text-[13px] lg:text-[14px] leading-relaxed">
               Alongside these innovations, we provide a wide portfolio of medical, diagnostic, surgical, and laboratory equipment, catering to hospitals, clinics, research institutes, and government healthcare projects.
             </p>
+                      <br />
+            <p className="text-[12px] md:text-[13px] lg:text-[14px] leading-relaxed">
+               As a trusted vendor on the Government e-Marketplace (GeM), we proudly serve reputed institutions such as the Central Council for Research in Ayurvedic Sciences (CCRAS), RARIID Patna, Patna Medical Collage (PMCH) & AIIMS Gorakhpur, delivering excellence with integrity.
         
+            </p>          
+           
           </div>
         </div>
       </div>
+
+      <TrustedInstitutes />
 
       {/* Our Values */}
       <div className="bg-gradient-to-br from-blue-50 via-white to-blue-50 py-10 md:py-14 lg:py-16 xl:py-20 2xl:py-24">
