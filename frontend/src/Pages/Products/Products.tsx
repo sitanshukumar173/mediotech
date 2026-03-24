@@ -495,13 +495,13 @@ export default function Products() {
                       <div className="flex items-center gap-2 pt-3 border-t border-gray-200">
                         <button
                           onClick={() => openDemoRequest(product.title)}
-                          className="flex-1 px-2.5 md:px-3 py-2.5 bg-white border-2 border-blue-600 text-blue-600 rounded-[10px] text-[11px] md:text-[12px] font-bold hover:bg-blue-50 hover:scale-[1.02] transition-all whitespace-nowrap"
+                          className="flex-1 px-2.5 md:px-3 py-2.5 bg-white border-2 border-blue-600 text-blue-600 rounded-[14px] md:rounded-[16px] text-[11px] md:text-[12px] font-bold hover:bg-blue-50 hover:scale-[1.02] transition-all whitespace-nowrap"
                         >
                           Get Demo
                         </button>
                         <button
                           onClick={() => handleProductDetail(product)}
-                          className="flex-1 px-2.5 md:px-3 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-[10px] text-[11px] md:text-[12px] font-bold hover:shadow-lg hover:scale-[1.02] transition-all flex items-center justify-center gap-1 whitespace-nowrap"
+                          className="flex-1 px-2.5 md:px-3 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-[14px] md:rounded-[16px] text-[11px] md:text-[12px] font-bold hover:shadow-lg hover:scale-[1.02] transition-all flex items-center justify-center gap-1 whitespace-nowrap"
                         >
                           <Eye className="w-3 md:w-4 h-3 md:h-4" />
                           Details
@@ -523,7 +523,7 @@ export default function Products() {
                 <button
                   onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                   disabled={currentPage === 1}
-                  className="px-3 md:px-4 py-1.5 md:py-2 bg-white border-2 border-gray-200 rounded-[8px] md:rounded-[10px] font-semibold text-[11px] md:text-[12px] text-gray-700 hover:border-blue-500 hover:text-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                  className="px-3 md:px-4 py-1.5 md:py-2 bg-white border-2 border-gray-200 rounded-[12px] md:rounded-[14px] font-semibold text-[11px] md:text-[12px] text-gray-700 hover:border-blue-500 hover:text-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                 >
                   Prev
                 </button>
@@ -535,7 +535,7 @@ export default function Products() {
                       <button
                         key={page}
                         onClick={() => setCurrentPage(page)}
-                        className={`w-8 md:w-9 h-8 md:h-9 rounded-[8px] md:rounded-[10px] font-bold text-[11px] md:text-[12px] transition-all flex items-center justify-center ${
+                        className={`w-8 md:w-9 h-8 md:h-9 rounded-[12px] md:rounded-[14px] font-bold text-[11px] md:text-[12px] transition-all flex items-center justify-center ${
                           currentPage === page
                             ? 'bg-blue-600 text-white shadow-lg'
                             : 'bg-white border-2 border-gray-200 text-gray-700 hover:border-blue-500 hover:text-blue-600'
@@ -550,7 +550,7 @@ export default function Products() {
                 <button
                   onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
                   disabled={currentPage === totalPages}
-                  className="px-3 md:px-4 py-1.5 md:py-2 bg-white border-2 border-gray-200 rounded-[8px] md:rounded-[10px] font-semibold text-[11px] md:text-[12px] text-gray-700 hover:border-blue-500 hover:text-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                  className="px-3 md:px-4 py-1.5 md:py-2 bg-white border-2 border-gray-200 rounded-[12px] md:rounded-[14px] font-semibold text-[11px] md:text-[12px] text-gray-700 hover:border-blue-500 hover:text-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                 >
                   Next
                 </button>
@@ -654,7 +654,7 @@ export default function Products() {
                     openDemoRequest(selectedProduct.title);
                     setShowDetailModal(false);
                   }}
-                  className="flex-1 px-4 md:px-6 py-2.5 md:py-3 bg-white border-2 border-blue-600 text-blue-600 rounded-[10px] md:rounded-[12px] text-[12px] md:text-[14px] font-bold hover:bg-blue-50 hover:scale-[1.02] transition-all"
+                  className="flex-1 px-4 md:px-6 py-2.5 md:py-3 bg-white border-2 border-blue-600 text-blue-600 rounded-[14px] md:rounded-[16px] text-[12px] md:text-[14px] font-bold hover:bg-blue-50 hover:scale-[1.02] transition-all"
                 >
                   Request Demo
                 </button>
@@ -663,7 +663,7 @@ export default function Products() {
                     setShowDetailModal(false);
                     setSelectedProduct(null);
                   }}
-                  className="flex-1 px-4 md:px-6 py-2.5 md:py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-[10px] md:rounded-[12px] text-[12px] md:text-[14px] font-bold hover:shadow-lg hover:scale-[1.02] transition-all"
+                  className="flex-1 px-4 md:px-6 py-2.5 md:py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-[14px] md:rounded-[16px] text-[12px] md:text-[14px] font-bold hover:shadow-lg hover:scale-[1.02] transition-all"
                 >
                   Close
                 </button>

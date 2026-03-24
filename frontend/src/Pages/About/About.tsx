@@ -1,6 +1,8 @@
 import { Target, Eye, Award, Shield, Globe, Users, Heart, Zap, CheckCircle, UserCircle } from 'lucide-react';
 import { useState } from 'react';
 import { TrustedInstitutes } from '../../components/Sections/HomePage/TrustedInstitutes';
+import { InfiniteSlider } from '../../components/core/infinite-slider';
+import { ProgressiveBlur } from '../../components/core/progressive-blur';
 
 export default function About() {
   const [hoveredCard, setHoveredCard] = useState<'conveyor' | 'sachet' | null>(null);
@@ -323,22 +325,41 @@ export default function About() {
             </p>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-4 md:gap-5 lg:gap-6">
-            {values.map((value, idx) => {
-              const Icon = value.icon;
-              return (
-                <div
-                  key={idx}
-                  className="bg-white/70 backdrop-blur-xl border-2 border-white/80 rounded-[20px] md:rounded-[24px] lg:rounded-[28px] p-5 md:p-6 lg:p-7 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 w-full md:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-1rem)]"
-                >
-                  <div className="w-10 md:w-11 lg:w-12 h-10 md:h-11 lg:h-12 bg-gradient-to-br from-[#2563EB] to-[#1d4ed8] rounded-[12px] md:rounded-[14px] lg:rounded-[16px] flex items-center justify-center mb-3 md:mb-4 shadow-lg shadow-blue-500/40">
-                    <Icon className="w-5 md:w-6 lg:w-6 h-5 md:h-6 lg:h-6 text-white" />
+          <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] py-5 md:py-6 overflow-visible">
+            <InfiniteSlider
+              gap={24}
+              speed={95}
+              speedOnHover={20}
+              className="w-full px-8 md:px-14 lg:px-20 xl:px-28"
+              containerClassName="overflow-visible"
+            >
+              {values.map((value, idx) => {
+                const Icon = value.icon;
+                return (
+                  <div
+                    key={idx}
+                    className="group bg-white/70 backdrop-blur-xl border-2 border-white/80 rounded-[20px] md:rounded-[24px] lg:rounded-[28px] p-5 md:p-6 lg:p-7 shadow-lg hover:border-blue-200 transition-colors duration-500 w-[280px] md:w-[330px] lg:w-[360px] xl:w-[380px] shrink-0"
+                  >
+                    <div className="w-10 md:w-11 lg:w-12 h-10 md:h-11 lg:h-12 bg-gradient-to-br from-[#2563EB] to-[#1d4ed8] rounded-[12px] md:rounded-[14px] lg:rounded-[16px] flex items-center justify-center mb-3 md:mb-4 shadow-lg shadow-blue-500/40 group-hover:scale-110 transition-transform">
+                      <Icon className="w-5 md:w-6 lg:w-6 h-5 md:h-6 lg:h-6 text-white" />
+                    </div>
+                    <h4 className="text-[14px] md:text-[15px] lg:text-[17px] font-bold text-gray-900 mb-2 md:mb-2.5">{value.title}</h4>
+                    <p className="text-[11px] md:text-[12px] lg:text-[13px] text-gray-600 leading-relaxed">{value.description}</p>
                   </div>
-                  <h4 className="text-[14px] md:text-[15px] lg:text-[17px] font-bold text-gray-900 mb-2 md:mb-2.5">{value.title}</h4>
-                  <p className="text-[11px] md:text-[12px] lg:text-[13px] text-gray-600 leading-relaxed">{value.description}</p>
-                </div>
-              );
-            })}
+                );
+              })}
+            </InfiniteSlider>
+
+            <ProgressiveBlur
+              className="pointer-events-none absolute -left-px top-0 h-full w-28 md:w-40 lg:w-52 bg-gradient-to-r from-blue-50 via-blue-50/85 to-transparent"
+              direction="left"
+              blurIntensity={1.2}
+            />
+            <ProgressiveBlur
+              className="pointer-events-none absolute -right-px top-0 h-full w-28 md:w-40 lg:w-52 bg-gradient-to-l from-blue-50 via-blue-50/85 to-transparent"
+              direction="right"
+              blurIntensity={1.2}
+            />
           </div>
         </div>
       </div>

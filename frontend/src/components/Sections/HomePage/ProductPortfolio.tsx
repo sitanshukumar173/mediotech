@@ -109,8 +109,8 @@ export default function ProductPortfolio() {
                 }`}
               >
                 <div className={imageFirst ? 'order-1' : 'order-1 lg:order-2'}>
-                  <div className="group relative rounded-[20px] md:rounded-[24px] lg:rounded-[26px] p-[1px] bg-gradient-to-br from-blue-200/70 via-white to-slate-200/80 shadow-[0_18px_40px_-20px_rgba(37,99,235,0.45)]">
-                    <div className="relative overflow-hidden rounded-[20px] md:rounded-[24px] lg:rounded-[26px] bg-white">
+                  <div className="group bg-white/70 backdrop-blur-xl border-2 border-white/80 rounded-[20px] md:rounded-[24px] lg:rounded-[28px] shadow-lg hover:border-blue-200 transition-colors duration-500">
+                    <div className="relative overflow-hidden rounded-[20px] md:rounded-[24px] lg:rounded-[28px]">
                       <ImageWithFallback
                         src={imageUrl}
                         alt={product.title}
@@ -130,7 +130,7 @@ export default function ProductPortfolio() {
                   </p>
                   <button
                     onClick={() => openProductDetails(product.title)}
-                    className="inline-flex items-center gap-2 bg-gradient-to-r from-[#2563EB] to-[#1d4ed8] text-white px-5 py-2.5 rounded-[10px] font-semibold text-[12px] md:text-[13px] hover:shadow-lg transition-all"
+                    className="inline-flex items-center gap-2 bg-gradient-to-r from-[#2563EB] to-[#1d4ed8] text-white px-5 py-2.5 rounded-[16px] md:rounded-[18px] font-semibold text-[12px] md:text-[13px] hover:shadow-lg transition-all"
                   >
                     View Details
                     <ArrowRight className="w-4 h-4" />
