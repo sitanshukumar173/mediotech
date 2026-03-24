@@ -91,13 +91,6 @@ export default function About() {
     }
   ];
 
-  const certifications = [
-    { name: 'ISO 13485:2016', desc: 'Medical Devices Quality Management' },
-    { name: 'ISO 9001:2015', desc: 'Quality Management Systems' },
-    { name: 'CE Certified', desc: 'European Conformity Standards' },
-    { name: 'FDA Registered', desc: 'US Food & Drug Administration' }
-  ];
-
   return (
     <div className="min-h-screen bg-white">
       {/* Dark Hero Section with Large MEDIOTECH Text */}
