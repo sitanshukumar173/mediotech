@@ -197,7 +197,7 @@ export default function About() {
             onMouseLeave={() => setHoveredCard(null)}
           >
             {/* SVG Background - Full Width Screen */}
-            <div className="w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] absolute inset-x-0 -top-40 md:max-[1023px]:-top-12 min-[820px]:max-[900px]:-top-16 min-[1024px]:max-[1279px]:-top-20 min-[1280px]:max-[1439px]:-top-32 max-[430px]:hidden">
+            <div className="w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] absolute inset-x-0 -top-40 md:max-[1023px]:-top-12 min-[820px]:max-[900px]:-top-16 min-[1024px]:max-[1279px]:-top-20 min-[1280px]:max-[1439px]:-top-32 max-[767px]:hidden">
               <img 
                 src="https://res.cloudinary.com/dlpluej6w/image/upload/v1774377416/SubtractSMALL_svakir.svg"
                 alt=""
@@ -206,7 +206,7 @@ export default function About() {
             </div>
             
             {/* Content Container - Within margins */}
-            <div className="relative z-10 px-5 md:px-8 lg:px-14 2xl:px-16 py-16 md:py-20 lg:py-28 xl:py-32 2xl:py-40 max-[430px]:px-4 max-[430px]:py-6 max-[430px]:rounded-2xl max-[430px]:border max-[430px]:border-blue-100 max-[430px]:bg-white max-[430px]:shadow-md max-[430px]:transition-colors max-[430px]:duration-300 max-[430px]:hover:bg-blue-600">
+            <div className="relative z-10 px-5 md:px-8 lg:px-14 2xl:px-16 py-16 md:py-20 lg:py-28 xl:py-32 2xl:py-40 max-[767px]:px-4 max-[767px]:py-6 max-[767px]:rounded-2xl max-[767px]:border max-[767px]:border-blue-100 max-[767px]:bg-white max-[767px]:shadow-md max-[767px]:transition-colors max-[767px]:duration-300 max-[767px]:hover:bg-blue-600">
               <div className="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center">
                   {/* Image on Left */}
@@ -249,7 +249,7 @@ export default function About() {
             onMouseLeave={() => setHoveredCard(null)}
           >
             {/* SVG Background - Full Width Screen */}
-            <div className="w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] absolute inset-x-0 -top-36 md:max-[1023px]:-top-9 min-[820px]:max-[900px]:-top-14 min-[1024px]:max-[1279px]:-top-14 min-[1280px]:max-[1439px]:-top-28 max-[430px]:hidden">
+            <div className="w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] absolute inset-x-0 -top-36 md:max-[1023px]:-top-9 min-[820px]:max-[900px]:-top-14 min-[1024px]:max-[1279px]:-top-14 min-[1280px]:max-[1439px]:-top-28 max-[767px]:hidden">
               <img 
                 src="https://res.cloudinary.com/dlpluej6w/image/upload/v1774377646/SubtractSMALLreversed_dutnbj.svg"
                 alt=""
@@ -258,7 +258,7 @@ export default function About() {
             </div>
             
             {/* Content Container - Within margins */}
-            <div className="relative z-10 px-5 md:px-8 lg:px-14 2xl:px-16 py-16 md:py-20 lg:py-28 xl:py-32 2xl:py-40 max-[430px]:px-4 max-[430px]:py-6 max-[430px]:rounded-2xl max-[430px]:border max-[430px]:border-blue-100 max-[430px]:bg-white max-[430px]:shadow-md max-[430px]:transition-colors max-[430px]:duration-300 max-[430px]:hover:bg-blue-600">
+            <div className="relative z-10 px-5 md:px-8 lg:px-14 2xl:px-16 py-16 md:py-20 lg:py-28 xl:py-32 2xl:py-40 max-[767px]:px-4 max-[767px]:py-6 max-[767px]:rounded-2xl max-[767px]:border max-[767px]:border-blue-100 max-[767px]:bg-white max-[767px]:shadow-md max-[767px]:transition-colors max-[767px]:duration-300 max-[767px]:hover:bg-blue-600">
               <div className="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center">
                   {/* Text on Left */}
