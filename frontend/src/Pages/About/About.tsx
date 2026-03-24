@@ -1,6 +1,8 @@
 import { Target, Eye, Award, Shield, Globe, Users, Heart, Zap, CheckCircle, UserCircle } from 'lucide-react';
+import { useState } from 'react';
 
 export default function About() {
+  const [hoveredCard, setHoveredCard] = useState<'conveyor' | 'sachet' | null>(null);
   const leaders = [
     {
       name: 'Utkarsh Dubey',
@@ -124,9 +126,9 @@ export default function About() {
 
             <h1 className="text-[28px] md:text-[36px] lg:text-[44px] xl:text-[52px] 2xl:text-[56px] font-bold text-gray-900 mb-4 md:mb-5 lg:mb-6 tracking-tight leading-tight">
               Innovating Healthcare,<br />
-              <span className="bg-gradient-to-r from-[#2563EB] via-[#3b82f6] to-[#2563EB] bg-clip-text text-transparent">
-                Empowering Hospitals
-              </span>
+                <span className="bg-gradient-to-r from-[#2563EB] via-[#3b82f6] to-[#2563EB] bg-clip-text text-transparent">
+                  Empowering Hospitals
+                </span>
             </h1>
             <p className="text-[13px] md:text-[14px] lg:text-[16px] xl:text-[17px] text-gray-600 max-w-3xl mx-auto leading-relaxed">
               At Mediotech Prime Solutions Pvt Ltd, we are redefining healthcare with innovation, technology, 
@@ -187,62 +189,123 @@ export default function About() {
       <div className="py-10 md:py-14 lg:py-16 xl:py-20 2xl:py-24">
         <div className="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto px-5 md:px-8 lg:px-8 xl:px-14 2xl:px-16">
           <div className="text-center mb-8 md:mb-10 lg:mb-12">
-            <h2 className="text-[26px] md:text-[32px] lg:text-[38px] xl:text-[44px] 2xl:text-[48px] font-bold text-gray-900 mb-3 md:mb-4 lg:mb-5">Our Core Innovations</h2>
-            <p className="text-[12px] md:text-[13px] lg:text-[15px] text-gray-600 max-w-2xl mx-auto">
-              Revolutionary solutions designed to transform patient care and hospital operations
-            </p>
+            <h2 className="text-[28px] md:text-[36px] lg:text-[44px] xl:text-[52px] 2xl:text-[56px] font-bold text-gray-900 mb-3 md:mb-4 lg:mb-5">
+              Our Core <span className="bg-gradient-to-r from-[#2563EB] via-[#3b82f6] to-[#2563EB] bg-clip-text text-transparent">
+                   Innovations
+                </span>      
+                
+             </h2>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-7 lg:gap-8">
-            {/* Conveyor G1 */}
-            <div className="bg-white/70 backdrop-blur-xl border-2 border-white/80 rounded-[20px] md:rounded-[24px] lg:rounded-[28px] xl:rounded-[32px] p-6 md:p-7 lg:p-8 shadow-xl">
-              <h3 className="text-[18px] md:text-[20px] lg:text-[22px] font-bold text-gray-900 mb-2 md:mb-3 lg:mb-4">Conveyor G1</h3>
-              <p className="text-[12px] md:text-[13px] lg:text-[14px] text-gray-600 mb-4 md:mb-5 lg:mb-5">
-                An automated motorized patient shifting bed that:
-              </p>
-              <ul className="space-y-2 md:space-y-2.5 lg:space-y-3">
-                {[
-                  'Transfers patients seamlessly between surfaces',
-                  'Reduces physical strain on staff',
-                  'Enhances patient comfort and safety'
-                ].map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-2 md:gap-2.5 lg:gap-3">
-                    <CheckCircle className="w-4 md:w-5 lg:w-5 h-4 md:h-5 lg:h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                    <span className="text-[11px] md:text-[12px] lg:text-[13px] text-gray-700">{item}</span>
-                  </li>
-                ))}
-              </ul>
+          {/* Conveyor G1 Card */}
+          <div 
+            className="relative mb-6 md:mb-8 lg:mb-10"
+            onMouseEnter={() => setHoveredCard('conveyor')}
+            onMouseLeave={() => setHoveredCard(null)}
+          >
+            {/* SVG Background - Full Width Screen */}
+            <div className="w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] absolute inset-x-0 -top-40 md:max-[1023px]:-top-12 min-[820px]:max-[900px]:-top-16 min-[1024px]:max-[1279px]:-top-20 min-[1280px]:max-[1439px]:-top-32 max-[430px]:hidden">
+              <img 
+                src="https://res.cloudinary.com/dlpluej6w/image/upload/v1774377416/SubtractSMALL_svakir.svg"
+                alt=""
+                className={`w-full h-full object-contain pointer-events-none transition-opacity duration-200 ease-in-out ${hoveredCard === 'sachet' ? 'opacity-0' : 'opacity-100'}`}
+              />
             </div>
+            
+            {/* Content Container - Within margins */}
+            <div className="relative z-10 px-5 md:px-8 lg:px-14 2xl:px-16 py-16 md:py-20 lg:py-28 xl:py-32 2xl:py-40 max-[430px]:px-4 max-[430px]:py-6 max-[430px]:rounded-2xl max-[430px]:border max-[430px]:border-blue-100 max-[430px]:bg-white max-[430px]:shadow-md max-[430px]:transition-colors max-[430px]:duration-300 max-[430px]:hover:bg-blue-600">
+              <div className="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center">
+                  {/* Image on Left */}
+                  <div className="flex justify-center lg:order-1">
+                    <img 
+                      src="https://res.cloudinary.com/dlpluej6w/image/upload/v1774374056/Convinier_01_vd0vvx.jpg"
+                      alt="Conveyor G1"
+                      className="w-full max-w-xs md:max-w-sm lg:max-w-md h-auto object-cover rounded-[16px] md:rounded-[20px] shadow-lg"
+                    />
+                  </div>
+                  
+                  {/* Text on Right */}
+                  <div className={`transition-colors duration-500 ease-in-out lg:order-2 ${hoveredCard === 'conveyor' ? 'text-white' : 'text-gray-900'}`}>
+                    <h3 className="text-[20px] md:text-[24px] lg:text-[28px] font-bold mb-3 md:mb-4 lg:mb-5">Conveyor G1</h3>
+                    <p className={`text-[12px] md:text-[13px] lg:text-[14px] mb-4 md:mb-5 lg:mb-6 transition-opacity duration-500 ease-in-out ${hoveredCard === 'conveyor' ? 'opacity-95' : 'opacity-80'}`}>
+                      An automated motorized patient shifting bed that:
+                    </p>
+                    <ul className="space-y-2 md:space-y-2.5 lg:space-y-3">
+                      {[
+                        'Transfers patients seamlessly between surfaces',
+                        'Reduces physical strain on staff',
+                        'Enhances patient comfort and safety'
+                      ].map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-2 md:gap-3 lg:gap-3">
+                          <CheckCircle className={`w-4 md:w-5 lg:w-5 h-4 md:h-5 lg:h-5 flex-shrink-0 mt-0.5 transition-colors duration-500 ease-in-out ${hoveredCard === 'conveyor' ? 'text-white' : 'text-blue-600'}`} />
+                          <span className={`text-[11px] md:text-[12px] lg:text-[13px] transition-colors duration-500 ease-in-out ${hoveredCard === 'conveyor' ? 'text-white' : 'text-gray-700'}`}>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-            {/* Sachet G1 */}
-            <div className="bg-white/70 backdrop-blur-xl border-2 border-white/80 rounded-[20px] md:rounded-[24px] lg:rounded-[28px] xl:rounded-[32px] p-6 md:p-7 lg:p-8 shadow-xl">
-              <h3 className="text-[18px] md:text-[20px] lg:text-[22px] font-bold text-gray-900 mb-2 md:mb-3 lg:mb-4">Sachet G1</h3>
-              <p className="text-[12px] md:text-[13px] lg:text-[14px] text-gray-600 mb-4 md:mb-5 lg:mb-5">
-                Smart sensor device preventing patient falls:
-              </p>
-              <ul className="space-y-2 md:space-y-2.5 lg:space-y-3">
-                {[
-                  'Fall Monitoring – Tracks patient posture and activity',
-                  'Safety Alerts – Real-time alerts to prevent falls',
-                  'Compact Design – Wearable patch or bedside sensor'
-                ].map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-2 md:gap-2.5 lg:gap-3">
-                    <CheckCircle className="w-4 md:w-5 lg:w-5 h-4 md:h-5 lg:h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                    <span className="text-[11px] md:text-[12px] lg:text-[13px] text-gray-700">{item}</span>
-                  </li>
-                ))}
-              </ul>
+          {/* Sachet G1 Card */}
+          <div 
+            className="relative"
+            onMouseEnter={() => setHoveredCard('sachet')}
+            onMouseLeave={() => setHoveredCard(null)}
+          >
+            {/* SVG Background - Full Width Screen */}
+            <div className="w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] absolute inset-x-0 -top-36 md:max-[1023px]:-top-9 min-[820px]:max-[900px]:-top-14 min-[1024px]:max-[1279px]:-top-14 min-[1280px]:max-[1439px]:-top-28 max-[430px]:hidden">
+              <img 
+                src="https://res.cloudinary.com/dlpluej6w/image/upload/v1774377646/SubtractSMALLreversed_dutnbj.svg"
+                alt=""
+                className={`w-full h-full object-contain pointer-events-none transition-opacity duration-500 ease-in-out ${hoveredCard === 'sachet' ? 'opacity-100' : 'opacity-0'}`}
+              />
+            </div>
+            
+            {/* Content Container - Within margins */}
+            <div className="relative z-10 px-5 md:px-8 lg:px-14 2xl:px-16 py-16 md:py-20 lg:py-28 xl:py-32 2xl:py-40 max-[430px]:px-4 max-[430px]:py-6 max-[430px]:rounded-2xl max-[430px]:border max-[430px]:border-blue-100 max-[430px]:bg-white max-[430px]:shadow-md max-[430px]:transition-colors max-[430px]:duration-300 max-[430px]:hover:bg-blue-600">
+              <div className="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center">
+                  {/* Text on Left */}
+                  <div className={`order-2 md:order-1 transition-colors duration-500 ease-in-out lg:order-1 ${hoveredCard === 'sachet' ? 'text-white' : 'text-gray-900'}`}>
+                    <h3 className="text-[20px] md:text-[24px] lg:text-[28px] font-bold mb-3 md:mb-4 lg:mb-5">Sachet G1</h3>
+                    <p className={`text-[12px] md:text-[13px] lg:text-[14px] mb-4 md:mb-5 lg:mb-6 transition-opacity duration-200 ease-in-out ${hoveredCard === 'sachet' ? 'opacity-95' : 'opacity-80'}`}>
+                      Smart sensor device preventing patient falls:
+                    </p>
+                    <ul className="space-y-2 md:space-y-2.5 lg:space-y-3">
+                      {[
+                        'Fall Monitoring – Tracks patient posture and activity',
+                        'Safety Alerts – Real-time alerts to prevent falls',
+                        'Compact Design – Wearable patch or bedside sensor'
+                      ].map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-2 md:gap-3 lg:gap-3">
+                          <CheckCircle className={`w-4 md:w-5 lg:w-5 h-4 md:h-5 lg:h-5 flex-shrink-0 mt-0.5 transition-colors duration-500 ease-in-out ${hoveredCard === 'sachet' ? 'text-white' : 'text-blue-600'}`} />
+                          <span className={`text-[11px] md:text-[12px] lg:text-[13px] transition-colors duration-500 ease-in-out ${hoveredCard === 'sachet' ? 'text-white' : 'text-gray-700'}`}>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  {/* Image on Right */}
+                  <div className="order-1 md:order-2 flex justify-center lg:order-2">
+                    <img 
+                      src="https://res.cloudinary.com/dlpluej6w/image/upload/v1774374057/Sachet_01_dbn6vx.png"
+                      alt="Sachet G1"
+                      className="w-full max-w-xs md:max-w-sm lg:max-w-md h-auto object-cover rounded-[16px] md:rounded-[20px] shadow-lg"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
           <div className="mt-6 md:mt-8 lg:mt-8 bg-gradient-to-br from-blue-600 to-blue-700 rounded-[20px] md:rounded-[24px] lg:rounded-[28px] xl:rounded-[32px] p-6 md:p-7 lg:p-8 shadow-xl text-white">
             <p className="text-[12px] md:text-[13px] lg:text-[14px] leading-relaxed">
-              We provide a complete portfolio of medical, diagnostic, surgical, and laboratory equipment, 
-              catering to hospitals, clinics, and government healthcare projects.
+              Alongside these innovations, we provide a wide portfolio of medical, diagnostic, surgical, and laboratory equipment, catering to hospitals, clinics, research institutes, and government healthcare projects.
             </p>
-            <p className="text-[12px] md:text-[13px] lg:text-[14px] leading-relaxed mt-2 md:mt-3 lg:mt-3">
-              As a trusted vendor in GeM, we proudly serve CCRAS, RARIDD Patna, PMCH & AIIMS Guwahati.
-            </p>
+        
           </div>
         </div>
       </div>
@@ -251,7 +314,9 @@ export default function About() {
       <div className="bg-gradient-to-br from-blue-50 via-white to-blue-50 py-10 md:py-14 lg:py-16 xl:py-20 2xl:py-24">
         <div id="values" className="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto px-5 md:px-8 lg:px-8 xl:px-14 2xl:px-16 scroll-mt-32">
           <div className="text-center mb-8 md:mb-10 lg:mb-12">
-            <h2 className="text-[26px] md:text-[32px] lg:text-[38px] xl:text-[44px] 2xl:text-[48px] font-bold text-gray-900 mb-3 md:mb-4 lg:mb-5">What We Stand For</h2>
+            <h2 className="text-[28px] md:text-[36px] lg:text-[44px] xl:text-[52px] 2xl:text-[56px] font-bold text-gray-900 mb-3 md:mb-4 lg:mb-5">What We <span className="bg-gradient-to-r from-[#2563EB] via-[#3b82f6] to-[#2563EB] bg-clip-text text-transparent">
+                    Stand For
+                </span>  </h2>
             <p className="text-[12px] md:text-[13px] lg:text-[15px] text-gray-600 max-w-2xl mx-auto">
               Our core values guide everything we do
             </p>
@@ -281,8 +346,10 @@ export default function About() {
       <div className="py-10 md:py-14 lg:py-16 xl:py-20 2xl:py-24">
         <div id="leaders" className="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto px-5 md:px-8 lg:px-8 xl:px-14 2xl:px-16 scroll-mt-32">
           <div className="text-center mb-8 md:mb-10 lg:mb-12">
-            <h2 className="text-[26px] md:text-[32px] lg:text-[38px] xl:text-[44px] 2xl:text-[48px] font-bold text-gray-900 mb-3 md:mb-4 lg:mb-5">Our Leaders</h2>
-            <p className="text-[12px] md:text-[13px] lg:text-[15px] text-gray-600 max-w-2xl mx-auto">
+            <h2 className="text-[28px] md:text-[36px] lg:text-[44px] xl:text-[52px] 2xl:text-[56px] font-bold text-gray-900 mb-3 md:mb-4 lg:mb-5">Our <span className="bg-gradient-to-r from-[#2563EB] via-[#3b82f6] to-[#2563EB] bg-clip-text text-transparent">
+                    Leaders
+                </span></h2>
+            <p className="text-[12px] md:text-[13px] lg:text-[15px] text-gray-600 max-w-2xl mx-auto"> 
               Meet the visionaries driving innovation at Mediotech
             </p>
           </div>
@@ -319,7 +386,9 @@ export default function About() {
       <div className="bg-gradient-to-br from-blue-50 via-white to-blue-50 py-10 md:py-14 lg:py-16 xl:py-20 2xl:py-24">
         <div id="team" className="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto px-5 md:px-8 lg:px-8 xl:px-14 2xl:px-16 scroll-mt-32">
           <div className="text-center mb-8 md:mb-10 lg:mb-12">
-            <h2 className="text-[26px] md:text-[32px] lg:text-[38px] xl:text-[44px] 2xl:text-[48px] font-bold text-gray-900 mb-3 md:mb-4 lg:mb-5">Our Team</h2>
+            <h2 className="text-[28px] md:text-[36px] lg:text-[44px] xl:text-[52px] 2xl:text-[56px] font-bold text-gray-900 mb-3 md:mb-4 lg:mb-5">Our <span className="bg-gradient-to-r from-[#2563EB] via-[#3b82f6] to-[#2563EB] bg-clip-text text-transparent">
+                    Team
+                </span></h2>
             <p className="text-[12px] md:text-[13px] lg:text-[15px] text-gray-600 max-w-2xl mx-auto">
               Dedicated professionals committed to excellence
             </p>
@@ -354,7 +423,7 @@ export default function About() {
       </div>
 
       {/* Certifications */}
-      <div className="py-10 md:py-14 lg:py-16 xl:py-20 2xl:py-24">
+      {/* <div className="py-10 md:py-14 lg:py-16 xl:py-20 2xl:py-24">
         <div id="certifications" className="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto px-5 md:px-8 lg:px-8 xl:px-14 2xl:px-16 scroll-mt-32">
           <div className="text-center mb-8 md:mb-10 lg:mb-12">
             <h2 className="text-[26px] md:text-[32px] lg:text-[38px] xl:text-[44px] 2xl:text-[48px] font-bold text-gray-900 mb-3 md:mb-4 lg:mb-5">Certifications & Compliance</h2>
@@ -378,7 +447,7 @@ export default function About() {
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
