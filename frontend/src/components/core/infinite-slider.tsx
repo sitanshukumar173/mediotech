@@ -8,6 +8,7 @@ type InfiniteSliderProps = {
   direction?: 'horizontal' | 'vertical';
   reverse?: boolean;
   className?: string;
+  containerClassName?: string;
 };
 
 export function InfiniteSlider({
@@ -18,6 +19,7 @@ export function InfiniteSlider({
   direction = 'horizontal',
   reverse = false,
   className,
+  containerClassName,
 }: InfiniteSliderProps) {
   const sliderId = useId().replace(/[^a-zA-Z0-9_-]/g, '');
   const trackRef = useRef<HTMLDivElement | null>(null);
@@ -129,7 +131,7 @@ export function InfiniteSlider({
 
   return (
     <div
-      className={`overflow-hidden ${className || ''}`.trim()}
+      className={`${containerClassName || 'overflow-hidden'} ${className || ''}`.trim()}
       onMouseEnter={() => {
         targetSpeedRef.current = speedOnHover ?? speed;
       }}

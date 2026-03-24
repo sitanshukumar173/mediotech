@@ -230,7 +230,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-gradient-to-r from-[#2563EB] to-[#1d4ed8] text-white py-3 rounded-lg font-bold flex items-center justify-center gap-2 hover:shadow-lg transition disabled:opacity-70"
+                className="w-full bg-gradient-to-r from-[#2563EB] to-[#1d4ed8] text-white py-3 rounded-[16px] md:rounded-[18px] font-bold flex items-center justify-center gap-2 hover:shadow-lg transition disabled:opacity-70"
               >
                 {loading ? 'Sending...' : 'Submit'}
                 <Send className="w-4 h-4" />
