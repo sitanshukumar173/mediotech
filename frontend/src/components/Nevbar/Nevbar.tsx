@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Phone, ChevronDown, Package, Package2, Heart, BookOpen, FileText, Video, GraduationCap, Shield, Wrench, Headphones, Building2, Users, Globe, Award, Target, Menu, X, Loader } from 'lucide-react';
+import { Phone, ChevronDown, Package, Package2, Heart, BookOpen, FileText, Video, GraduationCap, Shield, Wrench, Headphones, Building2, Users, Globe, Target, Menu, X, Loader } from 'lucide-react';
 import axiosInstance from '../../api/axios';
 // Use a direct URL string for external images
 const logo = "https://res.cloudinary.com/dlpluej6w/image/upload/v1766543013/Image_Mediotech_fv7zjv.svg";
@@ -224,14 +224,15 @@ export default function Navbar() {
 
   const aboutMenu = {
     'Company': [
-      { icon: Building2, label: 'About Mediotech', desc: 'Our story and mission', link: '/about' },
+      { icon: Building2, label: 'Overview', desc: 'About Mediotech at a glance', link: '/about#overview' },
       { icon: Target, label: 'Mission & Vision', desc: 'Our purpose and goals', link: '/about#mission' },
+      { icon: Target, label: 'Core Innovations', desc: 'Flagship healthcare solutions', link: '/about#innovations' },
+      { icon: Globe, label: 'Trusted Institutes', desc: 'Institutions we proudly serve', link: '/about#trusted-institutes' },
       { icon: Heart, label: 'Our Values', desc: 'What we stand for', link: '/about#values' },
     ],
     'People': [
       { icon: Users, label: 'Leadership Team', desc: 'Meet our leaders', link: '/about#leaders' },
       { icon: Users, label: 'Our Team', desc: 'Dedicated professionals', link: '/about#team' },
-      { icon: Award, label: 'Certifications', desc: 'ISO & quality standards', link: '/about#certifications' },
     ],
   };
 

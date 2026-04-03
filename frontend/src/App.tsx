@@ -19,6 +19,7 @@ import CreateAdmin from './admin/pages/CreateAdmin';
 import ProductManagement from './admin/pages/ProductManagement';
 import ContactManagement from './admin/pages/ContactManagement';
 import DemoRequestManagement from './admin/pages/DemoRequestManagement';
+import FeatureManagement from './admin/pages/FeatureManagement';
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
             <Route path="products" element={<ProductManagement />} />
             <Route path="contacts" element={<ContactManagement />} />
             <Route path="demo-requests" element={<DemoRequestManagement />} />
+            <Route path="features" element={<FeatureManagement />} />
           </Route>
 
           {/* 404 */}
