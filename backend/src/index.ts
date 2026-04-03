@@ -6,6 +6,7 @@ import { AuthAdminRouter } from "./Routes/Auth/AuthAdmin";
 import { AdminProductsRouter } from "./Routes/Products/AdminProducts";
 import { ContactRouter } from "./Routes/Contact/Contact";
 import { DemoRequestRouter } from "./Routes/Demo/DemoRequest";
+import { FeatureRouter } from "./Routes/Feature/AdminFeature";
 
 dotenv.config();
 
@@ -59,6 +60,9 @@ app.use("/", ContactRouter);
 
 // Demo request routes
 app.use("/", DemoRequestRouter);
+
+// Feature routes (public + admin)
+app.use("/", FeatureRouter);
 
 async function startServer() {
   await connectDb();

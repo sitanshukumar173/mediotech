@@ -1,11 +1,27 @@
 import { Target, Eye, Award, Shield, Globe, Users, Heart, Zap, CheckCircle, UserCircle } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { TrustedInstitutes } from '../../components/Sections/HomePage/TrustedInstitutes';
 import { InfiniteSlider } from '../../components/core/infinite-slider';
 import { ProgressiveBlur } from '../../components/core/progressive-blur';
 
 export default function About() {
   const [hoveredCard, setHoveredCard] = useState<'conveyor' | 'sachet' | null>(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!location.hash) {
+      return;
+    }
+
+    const sectionId = location.hash.replace('#', '');
+    const sectionElement = document.getElementById(sectionId);
+
+    if (sectionElement) {
+      sectionElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [location.hash]);
+
   const leaders = [
     {
       name: 'Utkarsh Dubey',
@@ -110,7 +126,7 @@ export default function About() {
       </div>
 
       {/* Content Section - Innovating Healthcare */}
-      <div className="py-10 md:py-14 lg:py-16 xl:py-20 2xl:py-24 bg-gradient-to-br from-blue-50/30 via-white to-blue-50/30">
+      <div id="overview" className="py-10 md:py-14 lg:py-16 xl:py-20 2xl:py-24 bg-gradient-to-br from-blue-50/30 via-white to-blue-50/30 scroll-mt-32">
         <div className="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto px-5 md:px-8 lg:px-8 xl:px-14 2xl:px-16">
           <div className="text-center">
             <div className="inline-block mb-4 md:mb-5 lg:mb-6">
@@ -182,7 +198,7 @@ export default function About() {
       </div>
 
       {/* Core Innovations */}
-      <div className="py-10 md:py-14 lg:py-16 xl:py-20 2xl:py-24">
+      <div id="innovations" className="py-10 md:py-14 lg:py-16 xl:py-20 2xl:py-24 scroll-mt-32">
         <div className="max-w-5xl xl:max-w-6xl 2xl:max-w-7xl mx-auto px-5 md:px-8 lg:px-8 xl:px-14 2xl:px-16">
           <div className="text-center mb-8 md:mb-10 lg:mb-12">
             <h2 className="text-[28px] md:text-[36px] lg:text-[44px] xl:text-[52px] 2xl:text-[56px] font-bold text-gray-900 mb-3 md:mb-4 lg:mb-5">
@@ -311,7 +327,9 @@ export default function About() {
         </div>
       </div>
 
-      <TrustedInstitutes />
+      <div id="trusted-institutes" className="scroll-mt-32">
+        <TrustedInstitutes />
+      </div>
 
       {/* Our Values */}
       <div className="bg-gradient-to-br from-blue-50 via-white to-blue-50 py-10 md:py-14 lg:py-16 xl:py-20 2xl:py-24">

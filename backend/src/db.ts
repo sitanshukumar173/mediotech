@@ -82,6 +82,16 @@ interface DemoRequestType {
   updatedAt: Date;
 }
 
+// Hero Feature Type
+interface FeatureType {
+  title: string;
+  description: string;
+  image: string;
+  link: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 // Product Schema
 const ProductSchema = new Schema<ProductType>(
   {
@@ -132,6 +142,17 @@ const DemoRequestSchema = new Schema<DemoRequestType>(
   { timestamps: true },
 );
 
+// Hero Feature Schema
+const FeatureSchema = new Schema<FeatureType>(
+  {
+    title: { type: String, required: true, trim: true },
+    description: { type: String, required: true, trim: true },
+    image: { type: String, required: true, trim: true },
+    link: { type: String, required: true, trim: true },
+  },
+  { timestamps: true },
+);
+
 //EXPORTS
 export const AdminModel = model<AdminType>(
   "admin_info",
@@ -149,3 +170,5 @@ export const DemoRequestModel = model<DemoRequestType>(
   "DemoRequest",
   DemoRequestSchema,
 );
+
+export const FeatureModel = model<FeatureType>("Feature", FeatureSchema);

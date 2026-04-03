@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { UserPlus, Package, Mail, MonitorPlay } from 'lucide-react';
+import { UserPlus, Package, Mail, MonitorPlay, Star } from 'lucide-react';
 
 export default function Sidebar() {
   const navItems = [
@@ -22,6 +22,11 @@ export default function Sidebar() {
       to: '/admin/dashboard/demo-requests',
       icon: MonitorPlay,
       label: 'Demo Request Manage',
+    },
+    {
+      to: '/admin/dashboard/features',
+      icon: Star,
+      label: 'Feature Manage',
     },
   ];
 

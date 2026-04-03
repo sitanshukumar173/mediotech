@@ -2,41 +2,62 @@ import { Search, ArrowRight } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { useState, useEffect } from 'react';
 import { useDemoRequest } from '../../../context/DemoRequestContext';
+import axiosInstance from '../../../api/axios';
 import './HomeHero.css';
+
+interface FeaturedItem {
+  _id?: string;
+  image: string;
+  title: string;
+  subtitle: string;
+  link: string;
+}
+
+interface FeatureApiItem {
+  _id: string;
+  image: string;
+  title: string;
+  description: string;
+  link: string;
+}
 
 export function HomeHero() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [featuredItems, setFeaturedItems] = useState<FeaturedItem[]>([]);
   const { openDemoRequest } = useDemoRequest();
 
-  const featuredItems = [
-    {
-      image: 'https://res.cloudinary.com/dlpluej6w/image/upload/v1770050270/Screenshot_2026-02-02_193836_ou0ih8.png',
-      title: 'Medical Exhibition 2026',
-      subtitle: 'Showcasing Innovation in Healthcare',
-      link: '#exhibition'
-    },
-    {
-      image: 'https://res.cloudinary.com/dlpluej6w/image/upload/v1770040428/Screenshot_2026-02-02_185239-removebg-preview_o5k8aa.png',
-      title: 'Advanced ICU Ventilator',
-      subtitle: 'Next-Gen Respiratory Care',
-      link: '#ventilators'
-    },
-    {
-      image: 'https://res.cloudinary.com/dlpluej6w/image/upload/v1770040427/Screenshot_2026-02-02_185212-removebg-preview_g6mvn6.png',
-      title: 'Patient Monitor Pro',
-      subtitle: 'Complete Vital Signs Monitoring',
-      link: '#monitors'
-    },
-    {
-      image: 'https://res.cloudinary.com/dlpluej6w/image/upload/v1770040427/Full-Digital-Ultrasound-Scanner-Machine-Price-removebg-preview_zul6ce.png',
-      title: 'Digital Ultrasound Scanner',
-      subtitle: 'High-Resolution Diagnostics',
-      link: '#ultrasound'
-    }
-  ];
+  useEffect(() => {
+    const fetchFeatures = async () => {
+      try {
+        const res = await axiosInstance.get('/feature');
+        const features: FeatureApiItem[] = Array.isArray(res.data)
+          ? res.data
+          : res.data?.features || [];
+
+        const mapped = features.map((feature) => ({
+          _id: feature._id,
+          image: feature.image,
+          title: feature.title,
+          subtitle: feature.description,
+          link: feature.link,
+        }));
+
+        setFeaturedItems(mapped);
+        setCurrentSlide(0);
+      } catch (error) {
+        console.error('Failed to load hero features:', error);
+      }
+    };
+
+    fetchFeatures();
+  }, []);
 
   useEffect(() => {
+    if (featuredItems.length <= 1) {
+      return;
+    }
+
     const timer = setInterval(() => {
       setIsTransitioning(true);
       setTimeout(() => {
@@ -48,7 +69,7 @@ export function HomeHero() {
   }, [featuredItems.length]);
 
   const handleSlideChange = (index: number) => {
-    if (index !== currentSlide) {
+    if (index !== safeCurrentSlide) {
       setIsTransitioning(true);
       setTimeout(() => {
         setCurrentSlide(index);
@@ -60,6 +81,11 @@ export function HomeHero() {
   const handleNavigate = (link: string) => {
     window.location.href = link;
   };
+
+  const safeCurrentSlide = featuredItems.length > 0
+    ? currentSlide % featuredItems.length
+    : 0;
+  const activeFeaturedItem = featuredItems[safeCurrentSlide];
 
   return (
     <>
@@ -169,10 +195,11 @@ export function HomeHero() {
 
                   {/* Image Section - Background Layer */}
                   <div className="absolute inset-0 flex items-center justify-center z-0">
-                    <div 
+                    {activeFeaturedItem && (
+                    <div
                       className={`relative transition-all duration-700 ease-out ${
-                        isTransitioning 
-                          ? 'opacity-0 scale-95 blur-sm' 
+                        isTransitioning
+                          ? 'opacity-0 scale-95 blur-sm'
                           : 'opacity-100 scale-100 blur-0'
                       }`}
                     >
@@ -181,9 +208,9 @@ export function HomeHero() {
                         <div className="relative">
                           <div className="rounded-[12px] sm-mobile:rounded-[16px] md:rounded-[24px] lg:rounded-[32px] overflow-hidden">
                             <ImageWithFallback
-                              key={currentSlide}
-                              src={featuredItems[currentSlide].image}
-                              alt={featuredItems[currentSlide].title}
+                              key={safeCurrentSlide}
+                              src={activeFeaturedItem.image}
+                              alt={activeFeaturedItem.title}
                               className="w-full h-auto max-h-[140px] sm-mobile:max-h-[180px] md:max-h-[280px] lg:max-h-[360px] object-contain"
                             />
                           </div>
@@ -212,15 +239,15 @@ export function HomeHero() {
                                 <div className="relative z-10 flex items-center gap-3 w-full">
                                   <div className="flex-1 min-w-0">
                                     <h3 className="text-[11px] sm-mobile:text-[13px] md:text-[16px] lg:text-[17px] font-bold text-gray-900 leading-tight truncate">
-                                      {featuredItems[currentSlide].title}
+                                      {activeFeaturedItem.title}
                                     </h3>
                                     <p className="text-[8px] sm-mobile:text-[9px] md:text-[10px] lg:text-[11px] text-gray-600 font-medium leading-tight mt-0.5 truncate">
-                                      {featuredItems[currentSlide].subtitle}
+                                      {activeFeaturedItem.subtitle}
                                     </p>
                                   </div>
 
                                   <button
-                                    onClick={() => handleNavigate(featuredItems[currentSlide].link)}
+                                    onClick={() => handleNavigate(activeFeaturedItem.link)}
                                     aria-label="Open featured item"
                                     title="Open featured item"
                                     className="group/arrow flex-shrink-0 w-6 h-6 sm-mobile:w-7 sm-mobile:h-7 md:w-10 md:h-10 lg:w-10 lg:h-10 bg-white border-2 border-gray-200 text-gray-900 rounded-full flex items-center justify-center hover:border-blue-300 hover:shadow-lg transition-all duration-300"
@@ -243,6 +270,7 @@ export function HomeHero() {
                       <div className="absolute -top-2 sm-mobile:-top-3 md:-top-4 right-4 sm-mobile:right-6 md:right-8 w-12 h-12 sm-mobile:w-16 sm-mobile:h-16 md:w-20 md:h-20 bg-gradient-to-br from-blue-400/20 to-blue-500/10 rounded-full blur-2xl animate-pulse"></div>
                       <div className="absolute -bottom-2 sm-mobile:-bottom-3 md:-bottom-4 left-2 sm-mobile:left-3 md:left-4 w-12 h-12 sm-mobile:w-16 sm-mobile:h-16 md:w-20 md:h-20 bg-gradient-to-br from-[#60a5fa]/15 to-transparent rounded-full blur-2xl"></div>
                     </div>
+                    )}
                     {/* Vertical Slide Indicators */}
                     <div className="featured-dots absolute -right-5 sm-mobile:-right-6 md:-right-9 lg:-right-10 top-1/2 -translate-y-1/2 z-20 flex flex-col items-center gap-1.5 sm-mobile:gap-2">
                       {featuredItems.map((_, idx) => (
@@ -252,7 +280,7 @@ export function HomeHero() {
                           aria-label={`Go to slide ${idx + 1}`}
                           title={`Slide ${idx + 1}`}
                           className={`w-2 rounded-full transition-all duration-500 ${
-                            idx === currentSlide
+                            idx === safeCurrentSlide
                               ? 'h-7 bg-gradient-to-b from-[#1d4ed8] to-[#2563EB] shadow-lg shadow-blue-400/40'
                               : 'h-2 bg-gray-300 hover:bg-gray-400'
                           }`}
