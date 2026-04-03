@@ -4,7 +4,8 @@ import { FeatureModel } from "../../db";
 import { AdminMiddleware, upload } from "../../middleware";
 import { v2 as cloudinary } from "cloudinary";
 
-const FeatureRouter = Router();
+const AdminFeatureRouter = Router();
+const PublicFeatureRouter = Router();
 
 const createFeatureSchema = z.object({
   title: z.string().min(1, "Title is required").trim(),
@@ -36,7 +37,7 @@ const getCloudinaryPublicId = (imageUrl: string): string | null => {
   }
 };
 
-FeatureRouter.get("/feature", async (_req: Request, res: Response) => {
+PublicFeatureRouter.get("/feature", async (_req: Request, res: Response) => {
   try {
     const features = await FeatureModel.find().sort({ createdAt: -1 });
     res.json({ message: "Features retrieved successfully", features });
@@ -48,8 +49,8 @@ FeatureRouter.get("/feature", async (_req: Request, res: Response) => {
   }
 });
 
-FeatureRouter.get(
-  "/admin/feature",
+AdminFeatureRouter.get(
+  "/feature",
   AdminMiddleware,
   async (_req: Request, res: Response) => {
     try {
@@ -64,8 +65,8 @@ FeatureRouter.get(
   },
 );
 
-FeatureRouter.post(
-  "/admin/feature",
+AdminFeatureRouter.post(
+  "/feature",
   AdminMiddleware,
   upload.single("image"),
   async (req: Request, res: Response) => {
@@ -102,8 +103,8 @@ FeatureRouter.post(
   },
 );
 
-FeatureRouter.put(
-  "/admin/feature/:id",
+AdminFeatureRouter.put(
+  "/feature/:id",
   AdminMiddleware,
   upload.single("image"),
   async (req: Request, res: Response) => {
@@ -159,8 +160,8 @@ FeatureRouter.put(
   },
 );
 
-FeatureRouter.delete(
-  "/admin/feature/:id",
+AdminFeatureRouter.delete(
+  "/feature/:id",
   AdminMiddleware,
   async (req: Request, res: Response) => {
     try {
@@ -191,4 +192,4 @@ FeatureRouter.delete(
   },
 );
 
-export { FeatureRouter };
+export { AdminFeatureRouter, PublicFeatureRouter };
