@@ -1,9 +1,9 @@
 import AboutSection from "../../components/Sections/HomePage/AboutSection"
 import ContactCTA from "../../components/Sections/HomePage/ContactCTA"
-import Facility from "../../components/Sections/HomePage/Facility"
 import { HomeHero } from "../../components/Sections/HomePage/HomeHero"
 import ICUVentilators from "../../components/Sections/HomePage/ICUVentilators"
 import MadeInIndia from "../../components/Sections/HomePage/MadeInIndia"
+import MediotechFootprint from "../../components/Sections/HomePage/MediotechFootprint"
 import ProductPortfolio from "../../components/Sections/HomePage/ProductPortfolio"
 import ProvenScale from "../../components/Sections/HomePage/ProvenScale"
 import Resources from "../../components/Sections/HomePage/Resources"
@@ -27,7 +27,7 @@ function HomePage() {
     <Resources/>
     <AboutSection/>
     <ContactCTA/>
-    <Facility/>
+    <MediotechFootprint/>
    </div>
   )
 }

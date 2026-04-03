@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Phone, ChevronDown, Package, Package2, Heart, BookOpen, FileText, Video, GraduationCap, Shield, Wrench, Headphones, Building2, Users, Globe, Target, Menu, X, Loader } from 'lucide-react';
+import { Phone, ChevronDown, Package, Package2, Heart, Image as ImageIcon, Building2, Users, Globe, Target, Menu, X, Loader } from 'lucide-react';
 import axiosInstance from '../../api/axios';
 // Use a direct URL string for external images
 const logo = "https://res.cloudinary.com/dlpluej6w/image/upload/v1766543013/Image_Mediotech_fv7zjv.svg";
@@ -204,23 +204,14 @@ export default function Navbar() {
     );
   };
 
-  const resourcesMenu = {
-    'Documentation': [
-      { icon: BookOpen, label: 'Product Manuals', desc: 'Complete user guides' },
-      { icon: FileText, label: 'Technical Specs', desc: 'Detailed specifications' },
-      { icon: Shield, label: 'Compliance Docs', desc: 'Regulatory certificates' },
-    ],
-    'Training': [
-      { icon: Video, label: 'Video Tutorials', desc: 'Step-by-step training' },
-      { icon: GraduationCap, label: 'Training Programs', desc: 'Professional certification' },
-      { icon: BookOpen, label: 'Knowledge Base', desc: 'Comprehensive guides' },
-    ],
-    'Support': [
-      { icon: Headphones, label: '24/7 Support', desc: 'Round-the-clock assistance' },
-      { icon: Wrench, label: 'Maintenance Services', desc: 'Preventive maintenance' },
-      { icon: Globe, label: 'Service Network', desc: 'Pan-India coverage' },
-    ],
-  };
+  const resourcesMenu = [
+    {
+      icon: ImageIcon,
+      label: 'Gallery',
+      desc: 'Mediotech FootPrint image collection',
+      link: '/gallery',
+    },
+  ];
 
   const aboutMenu = {
     'Company': [
@@ -348,39 +339,33 @@ export default function Navbar() {
 
               {activeDropdown === 'resources' && (
                 <div className="absolute top-full left-1/2 -translate-x-1/2 pt-6">
-                  <div className="w-[800px] bg-white rounded-[28px] shadow-2xl border-2 border-gray-100 p-8">
-                    <div className="grid grid-cols-3 gap-8">
-                      {Object.entries(resourcesMenu).map(([category, items]) => (
-                        <div key={category}>
-                          <h3 className="text-[11px] font-bold text-gray-500 uppercase tracking-[0.15em] mb-5">
-                            {category}
-                          </h3>
-                          <div className="space-y-1">
-                            {items.map((item) => {
-                              const Icon = item.icon;
-                              return (
-                                <a
-                                  key={item.label}
-                                  href="#"
-                                  className="flex items-start gap-3 p-3 rounded-2xl hover:bg-blue-50 transition-all group"
-                                >
-                                  <div className="w-10 h-10 bg-gradient-to-br from-[#2563EB] to-[#1d4ed8] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                                    <Icon className="w-5 h-5 text-white" />
-                                  </div>
-                                  <div className="flex-1">
-                                    <div className="text-[14px] font-bold text-gray-900 mb-0.5">
-                                      {item.label}
-                                    </div>
-                                    <div className="text-[12px] text-gray-600">
-                                      {item.desc}
-                                    </div>
-                                  </div>
-                                </a>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      ))}
+                  <div className="w-[360px] bg-white rounded-[28px] shadow-2xl border-2 border-gray-100 p-6">
+                    <h3 className="text-[11px] font-bold text-gray-500 uppercase tracking-[0.15em] mb-3">
+                      Resources
+                    </h3>
+                    <div className="space-y-1">
+                      {resourcesMenu.map((item) => {
+                        const Icon = item.icon;
+                        return (
+                          <Link
+                            key={item.label}
+                            to={item.link}
+                            className="flex items-start gap-3 p-3 rounded-2xl hover:bg-blue-50 transition-all group"
+                          >
+                            <div className="w-10 h-10 bg-gradient-to-br from-[#2563EB] to-[#1d4ed8] rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                              <Icon className="w-5 h-5 text-white" />
+                            </div>
+                            <div className="flex-1">
+                              <div className="text-[14px] font-bold text-gray-900 mb-0.5">
+                                {item.label}
+                              </div>
+                              <div className="text-[12px] text-gray-600">
+                                {item.desc}
+                              </div>
+                            </div>
+                          </Link>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
@@ -531,32 +516,25 @@ export default function Navbar() {
                 </button>
                 {activeMobileDropdown === 'resources' && (
                   <div className="mt-2 ml-4 space-y-2">
-                    {Object.entries(resourcesMenu).map(([category, items]) => (
-                      <div key={category} className="space-y-1">
-                        <div className="px-4 py-2 text-[11px] font-bold text-gray-500 uppercase tracking-wider">
-                          {category}
-                        </div>
-                        {items.map((item) => {
-                          const Icon = item.icon;
-                          return (
-                            <a
-                              key={item.label}
-                              href="#"
-                              onClick={toggleMobileMenu}
-                              className="flex items-center gap-3 px-4 py-2.5 hover:bg-blue-50 rounded-lg transition-colors"
-                            >
-                              <div className="w-8 h-8 bg-gradient-to-br from-[#2563EB] to-[#1d4ed8] rounded-lg flex items-center justify-center flex-shrink-0">
-                                <Icon className="w-4 h-4 text-white" />
-                              </div>
-                              <div>
-                                <div className="text-[13px] font-semibold text-gray-900">{item.label}</div>
-                                <div className="text-[11px] text-gray-600">{item.desc}</div>
-                              </div>
-                            </a>
-                          );
-                        })}
-                      </div>
-                    ))}
+                    {resourcesMenu.map((item) => {
+                      const Icon = item.icon;
+                      return (
+                        <Link
+                          key={item.label}
+                          to={item.link}
+                          onClick={toggleMobileMenu}
+                          className="flex items-center gap-3 px-4 py-2.5 hover:bg-blue-50 rounded-lg transition-colors"
+                        >
+                          <div className="w-8 h-8 bg-gradient-to-br from-[#2563EB] to-[#1d4ed8] rounded-lg flex items-center justify-center flex-shrink-0">
+                            <Icon className="w-4 h-4 text-white" />
+                          </div>
+                          <div>
+                            <div className="text-[13px] font-semibold text-gray-900">{item.label}</div>
+                            <div className="text-[11px] text-gray-600">{item.desc}</div>
+                          </div>
+                        </Link>
+                      );
+                    })}
                   </div>
                 )}
               </div>
