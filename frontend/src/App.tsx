@@ -8,6 +8,7 @@ import { NotFound } from './Pages/Error/NotFound';
 import Products from './Pages/Products/Products';
 import Contact from './Pages/Contact/Contact';
 import About from './Pages/About/About';
+import Gallery from './Pages/Gallery/Gallery';
 
 // Admin Components
 import { AuthProvider } from './admin/context/AuthContext';
@@ -20,6 +21,7 @@ import ProductManagement from './admin/pages/ProductManagement';
 import ContactManagement from './admin/pages/ContactManagement';
 import DemoRequestManagement from './admin/pages/DemoRequestManagement';
 import FeatureManagement from './admin/pages/FeatureManagement';
+import GalleryImageManagement from './admin/pages/GalleryImageManagement';
 
 function App() {
   return (
@@ -31,6 +33,7 @@ function App() {
           <Route path="/products" element={<Layout><Products /></Layout>} />
           <Route path="/contact" element={<Layout><Contact /></Layout>} />
           <Route path="/about" element={<Layout><About /></Layout>} />
+          <Route path="/gallery" element={<Layout><Gallery /></Layout>} />
 
           {/* Admin Login */}
           <Route path="/admin/login" element={<AdminLogin />} />
@@ -50,6 +53,7 @@ function App() {
             <Route path="contacts" element={<ContactManagement />} />
             <Route path="demo-requests" element={<DemoRequestManagement />} />
             <Route path="features" element={<FeatureManagement />} />
+            <Route path="gallery-images" element={<GalleryImageManagement />} />
           </Route>
 
           {/* 404 */}

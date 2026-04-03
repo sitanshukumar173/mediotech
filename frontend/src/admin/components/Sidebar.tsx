@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { UserPlus, Package, Mail, MonitorPlay, Star } from 'lucide-react';
+import { UserPlus, Package, Mail, MonitorPlay, Star, Images } from 'lucide-react';
 
 export default function Sidebar() {
   const navItems = [
@@ -27,6 +27,11 @@ export default function Sidebar() {
       to: '/admin/dashboard/features',
       icon: Star,
       label: 'Feature Manage',
+    },
+    {
+      to: '/admin/dashboard/gallery-images',
+      icon: Images,
+      label: 'Gallery Images Manage',
     },
   ];
 

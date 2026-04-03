@@ -111,7 +111,7 @@ export default function About() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white overflow-x-hidden">
       {/* Dark Hero Section with Large MEDIOTECH Text */}
       <div className="relative pt-28 md:pt-36 lg:pt-44 xl:pt-52 pb-32 md:pb-40 lg:pb-48 xl:pb-56 bg-gradient-to-br from-[#2563EB] to-[#183491]">
         {/* Large Background Text "MEDIOTECH" aligned to center within 7xl container */}

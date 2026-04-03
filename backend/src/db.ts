@@ -92,6 +92,13 @@ interface FeatureType {
   updatedAt: Date;
 }
 
+// Gallery Image Type
+interface GalleryImageType {
+  image: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 // Product Schema
 const ProductSchema = new Schema<ProductType>(
   {
@@ -153,6 +160,14 @@ const FeatureSchema = new Schema<FeatureType>(
   { timestamps: true },
 );
 
+// Gallery Image Schema
+const GalleryImageSchema = new Schema<GalleryImageType>(
+  {
+    image: { type: String, required: true, trim: true },
+  },
+  { timestamps: true },
+);
+
 //EXPORTS
 export const AdminModel = model<AdminType>(
   "admin_info",
@@ -172,3 +187,8 @@ export const DemoRequestModel = model<DemoRequestType>(
 );
 
 export const FeatureModel = model<FeatureType>("Feature", FeatureSchema);
+
+export const GalleryImageModel = model<GalleryImageType>(
+  "GalleryImage",
+  GalleryImageSchema,
+);

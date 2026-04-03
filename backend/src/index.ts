@@ -10,6 +10,10 @@ import {
   AdminFeatureRouter,
   PublicFeatureRouter,
 } from "./Routes/Feature/AdminFeature";
+import {
+  AdminGalleryRouter,
+  PublicGalleryRouter,
+} from "./Routes/Gallery/GalleryImages";
 
 dotenv.config();
 
@@ -61,6 +65,9 @@ app.use("/admin", AdminProductsRouter);
 // Admin feature routes
 app.use("/admin", AdminFeatureRouter);
 
+// Admin gallery routes
+app.use("/admin", AdminGalleryRouter);
+
 // Contact routes
 app.use("/", ContactRouter);
 
@@ -69,6 +76,9 @@ app.use("/", DemoRequestRouter);
 
 // Feature routes (public + admin)
 app.use("/", PublicFeatureRouter);
+
+// Gallery routes (public)
+app.use("/", PublicGalleryRouter);
 
 async function startServer() {
   await connectDb();
