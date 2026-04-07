@@ -1,2 +1,2 @@
-# mediotech
-https://mediotech.pages.dev/
+
+www.mediotech.in
