@@ -1,7 +1,10 @@
 import axios from "axios";
+// This logic detects if the browser is on your new domain
+const isProduction = window.location.hostname.includes("mediotech.in");
 
-const API_BASE_URL =
-  import.meta.env.VITE_API_URL || "https://mediotech.onrender.com";
+const API_BASE_URL = isProduction
+  ? "https://www.mediotech.in/api" // New Safalhost API
+  : "https://mediotech.onrender.com"; // Fallback for Cloudflare/Local
 
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
