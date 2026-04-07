@@ -24,8 +24,8 @@ const allowedOrigins = [
   process.env.FRONTEND_URL || "http://localhost:5173",
   "http://localhost:5174",
   "https://mediotech.pages.dev",
-  "https://www.mediotech.in/",
-  "https://mediotech.in/",
+  "https://www.mediotech.in",
+  "https://mediotech.in",
   "http://localhost:5173",
 ];
 
@@ -49,7 +49,7 @@ const connectDb = async () => {
     console.log("MongoDB Connected");
   } catch (err) {
     console.error(" Connection Failed:", err);
-    process.exit(1);
+    // process.exit(1);
   }
 };
 
@@ -100,7 +100,7 @@ async function startServer() {
 
 startServer().catch((err) => {
   console.error("Startup error:", err);
-  process.exit(1);
+  // process.exit(1);
 });
 
 export default app;
